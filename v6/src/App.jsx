@@ -11,7 +11,6 @@ function App() {
   return <div>
       <Router>
         <Routes>
-
           <Route path="/home" element={<Home />} />
           <Route path="/Login" element={<LoginPage form={'LoginForm'}/>} />
           <Route path="/Register" element={<LoginPage form={'RegisterForm'}/>} />
