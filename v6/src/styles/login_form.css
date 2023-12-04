@@ -1,0 +1,166 @@
+html {
+    background: #0C0C13;
+    color: #b0b1b1;
+    backdrop-filter: blur(2px);
+    /* background-image: url(../images/ok.png); */
+    image-resolution: initial;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* body {
+    display: flex;
+    justify-content: center;
+} */
+
+.main_container {
+    color: #b0b1b1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 7%;
+    padding-top: 2%;
+    margin-top: 5%;
+    box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.25);
+    border-radius: 0.5vw;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    word-wrap: break-word;
+    min-width: 900px;
+    min-height: 600px;
+}
+
+.login_container {
+    padding: 20px;
+    margin: 20px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, #141514 0%, #3a3a3abd 100%);
+    box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.25);
+    border-radius: 0.5vw;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+input {
+    text-align: center;
+    margin: 5px;
+    padding: 0.5vw;
+    background-color: #3c3c3c;
+    color:#b0b1b1;
+    border: 1px solid rgb(122, 122, 122);
+    border-radius: 0.2vw;
+    font-size: 1.5vw;
+    font-family: 'DamagePlan';
+    box-shadow: inset 0px 8px 17px rgba(0, 0, 0, 0.25);
+}
+
+
+.buttons {
+    /* font-family: 'DamagePlan'; */
+    background-color: #3c3c3c;
+    border: 0px;
+    border-radius: 0.2vw;
+    font-size: 1.5vw;
+    text-align: center;
+    margin: 5px;
+    padding: 0.5vw;
+    color: #b0b1b1;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    transition: 0.5s;
+}
+
+button {
+    font-size: 1.5vw;
+    font-family: 'DamagePlan';
+    background: none;
+    border: 0px;
+    border-radius: 0.2vw;
+    font-size: 1.5vw;
+    text-align: center;
+    margin: 5px;
+    padding: 0.5vw;
+    color: #b0b1b1;
+}
+
+h1 {
+    font-family: 'DamagePlan';
+    text-align: center;
+    font-size: 4.2vw;
+    color: #b0b1b1;
+    font-weight:bolder;
+}
+
+h2 {
+    font-family: 'DamagePlan';
+    margin: 10%;
+    text-align: center;
+    font-size: 2.2vw;
+    color: #b0b1b1;
+    font-weight:bolder;
+}
+
+label {
+    font-family: 'DamagePlan';
+    text-align: center;
+    color: #b0b1b1;
+    font-weight:bolder;
+}
+
+p {
+    font-family: 'DamagePlan';
+    font-size: 1.2vw;
+    border-radius: 5px;
+    /* border: 1px #b0b1b1; */
+    border-width: 12px black;
+    text-align: center;
+    margin: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0.1vw;
+    /* max-width: min-content; */
+    /* min-width: 100%; */
+    background-color: #3c3c3c;
+    box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.1);
+    visibility: hidden;
+
+}
+
+a {
+    color: #b0b1b1;
+    font-size: larger;
+}
+
+section {
+    margin-bottom: 10%;
+    display: grid;
+    place-items: center;
+    align-content: center;
+}
+
+.hidden {
+    opacity: 0;
+    transition: all 1s;
+}
+
+.show {
+    opacity: 1;
+    transition: all 2s;
+}
+
+ /*@media screen and (max-width: 475px)
+  {
+    .h1{font-size: 20px}
+    .main_container{height: 100%; width: 100%; border: 0px; font-size: 5vw; backdrop-filter: blur(0px); box-shadow: none;} 
+    .buttons{font-size: 5vw; padding: 1vw;}
+    .scroll{display: none}
+    /* .html{backdrop-filter: blur(20px);} 
+
+  }
+  /* @media screen and (max-width: 1440px)
+  {
+      .main_container{height: 100%; width: 100%; border: 0px}
+  } */
