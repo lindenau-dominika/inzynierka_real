@@ -23,7 +23,7 @@ export const SingleCard = (props) =>
 }
 
 export const Collage = () => {
-  const users = [
+  const recent_maps = [
     { map_image: Nuke, map_name: 'Nuke', map_score: '13-2' },
     { map_image: Overpass, map_name: 'Overpass', map_score: '13-5' },
     { map_image: Vertigo, map_name: 'Vertigo', map_score: '13-2' },
@@ -34,9 +34,9 @@ export const Collage = () => {
 
   return (
     <Carousel show={3} slide={3} swiping={false} transition={1} autoSwipe={0}>
-      {users.map((user, key) => (
+      {recent_maps.map((map, key) => (
         // <Link to={`/statistics/${map_name}`}>
-        <SingleCard image={user.map_image} map_name={user.map_name} score={user.map_score} key={key} />
+        <SingleCard image={map.map_image} map_name={map.map_name} score={map.map_score} key={key} />
         // </Link>
       ))}
     </Carousel>

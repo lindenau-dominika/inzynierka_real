@@ -6,7 +6,7 @@ export const Sidenav = () =>
 {
     return (
             <div className='sidenav'>
-                <Link to="/">
+                <Link to="/home">
                     <div className='logo'>
                         <img src={LogoImage}  alt="Logo of omega" />
                     </div>

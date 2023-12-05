@@ -1,7 +1,8 @@
 import React from "react";
 import { Sidenav } from "../components/Sidenav";
 import { Header } from "../components/Header";
-// import StatsTable from "../components/StatsTable";
+import MatchStats from "../components/MatchStats";
+import '../styles/gamestats.css'
 
 export const Gamestats = () => {
     return (
@@ -9,6 +10,9 @@ export const Gamestats = () => {
         {/* <StatsTable /> */}
         <Sidenav />
         <Header />
+        <body>
+        <MatchStats />
+        </body>
         </>
     )
 }
