@@ -3,12 +3,8 @@
     list-style-type: none;
     width: 100%;
     margin: 1%;
-    /* height: 100%; */
-    border: 0px black;
-    /* border-bottom:1px solid purple; */
     border-radius: 5px;
     border-collapse: collapse;
-
 }
 
 
@@ -24,17 +20,32 @@ table, td {
     border-radius: 20px;
 }
 
+table {
+    box-shadow: 0px, 10px, 5px black;
+}
 td {
     padding: 5px;
     grid-gap: 10px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     border-radius: 10px;
-    
+    border-bottom: 1px solid rgb(66, 50, 71);
+}
+
+tr:hover {
+    background-color: rgba(66, 50, 71, 0.1); /* Dodaj podświetlenie */
+}
+
+td:hover {
+    padding: 5px;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    border-radius: 10px;
+    border-bottom: 1px solid rgb(66, 50, 71);
 }
 
 th {
     background-color: rgb(38, 29, 42);
-    border-radius: 5px;
+    /* border-radius: 5px 0px 0p; */
     border-bottom: 1px solid rgb(48, 36, 52);
 }
 
@@ -45,7 +56,9 @@ th {
 }
 
 .avatar-image {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 10%;
+    opacity: 1;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.256);
 }

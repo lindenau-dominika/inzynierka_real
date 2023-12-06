@@ -8,17 +8,17 @@ import { LoginPage } from './pages/LoginPage'
 
 function App() {
   
-  return <div>
+  return <>
       <Router>
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/Login" element={<LoginPage form={'LoginForm'}/>} />
           <Route path="/Register" element={<LoginPage form={'RegisterForm'}/>} />
           <Route path='*' element={<h1>PAGE NOT FOUND</h1>}/>
-          <Route path='/statistics' element={<Gamestats/>} />
+          <Route path='/statistics/:matchId' element={<Gamestats/>} />
         </Routes>
       </Router>
-    </div>
+    </>
 }
 
 export default App

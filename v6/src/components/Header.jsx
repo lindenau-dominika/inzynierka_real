@@ -11,8 +11,8 @@ export const Header = (props) =>
     return (
         <header>
             <input placeholder='Compare with others'></input>
-          <div class='profile'>
-            <img class='avatar' src={AvatarImage} alt="your avatar" />
+          <div className='profile'>
+            <img className='avatar' src={AvatarImage} alt="your avatar" />
             <h3>{user.username}</h3>
           </div>
         </header>

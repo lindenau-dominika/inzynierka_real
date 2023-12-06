@@ -1,73 +1,150 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TableTemplate } from '../components/Table';
 import '../styles/gamestats.css';
-import AvatarImage from '../assets/najs.jpg'
+import { useParams, Link } from 'react-router-dom';
+import player1 from '../assets/player1.jpg';
+import player2 from '../assets/player2.jpg';
+import player3 from '../assets/player3.jpg';
+import player4 from '../assets/player4.jpg';
+import player5 from '../assets/player5.jpg';
+import player6 from '../assets/player6.jpg';
+import player7 from '../assets/player7.jpg';
+import player8 from '../assets/player8.jpg';
+import player9 from '../assets/player9.jpg';
+import player10 from '../assets/player10.jpg';
 
 const MatchStats = () => {
-  const rounds = 20;
+  const { matchId } = useParams();
+  const [team1t, setTeam1t] = useState([]);
+  const [team2ct, setTeam2ct] = useState([]);
+  const [team1ct, setTeam1ct] = useState([]);
+  const [team2t, setTeam2t] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  const colNames = [ 'Username', 'Kills', 'Deaths', 'Assists', 'K/D Ratio', 'Total Damage', 'head_accuracy'];
+  
+  const handleMatch = async () => {
+    try {
+      const response = await fetch(`/xd/matches/${matchId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-  const team_1 = [
-    { id: 1, image: AvatarImage, username: 'Zira', kills: 18, deaths: 13, assists: 7, headshots: 13, total_damage: 2137 },
-    { id: 2, image: AvatarImage,  username: 'Kolieks', kills: 13, deaths: 50, assists: 7, headshots: 13, total_damage: 2137 },
-    { id: 3, image: AvatarImage,  username: 'Piku', kills: 20, deaths: 15, assists: 7, headshots: 13, total_damage: 2137 },
-    { id: 4, image: AvatarImage,  username: 'Masterio', kills: 18, deaths: 12, assists: 7, headshots: 13, total_damage: 2137 },
-    { id: 5, image: AvatarImage,  username: 'Lucyia', kills: 13, deaths: 50, assists: 7, headshots: 13, total_damage: 2137 },
-  ];
-  
-  const team_2 = [
-    { id: 6,  image: AvatarImage, username: 'Dedpullo', kills: 25, deaths: 10, assists: 8, headshots: 15, total_damage: 2500 },
-    { id: 7,  image: AvatarImage, username: 'Kossus', kills: 15, deaths: 20, assists: 5, headshots: 10, total_damage: 1800 },
-    { id: 8,  image: AvatarImage, username: 'Kubusss', kills: 22, deaths: 18, assists: 9, headshots: 12, total_damage: 2200 },
-    { id: 9,  image: AvatarImage, username: 'Hromak', kills: 20, deaths: 15, assists: 7, headshots: 13, total_damage: 2100 },
-    { id: 10,  image: AvatarImage,  username: 'Mhajkel', kills: 18, deaths: 12, assists: 7, headshots: 13, total_damage: 2000 },
-  ];
-  
-  const colNames = [ 'Username', 'Kills', 'Deaths', 'Assists', 'K/D Ratio', 'Total Damage', 'Headshots'];
-  
-  const tableData1 = team_1.map((user) => [
-    {image: user.image, username: user.username},
-    user.kills,
-    user.deaths,
-    user.assists,
-    user.deaths !== 0 ? (user.kills / user.deaths).toFixed(2) : (user.kills / 1).toFixed(2),
-    user.total_damage,
-    user.headshots,
+      if (response.ok) {
+        const data = await response.json();
+        const match = data.match_stats || [];
+        const team1t = match.slice(0, 5);
+        const team2ct = match.slice(5, 10);
+        const team1ct = match.slice(10, 15);
+        const team2t = match.slice(15);
+        setTeam1t(team1t);
+        setTeam2ct(team2ct);
+        setTeam1ct(team1ct)
+        setTeam2t(team2t);
+        // console.log('team1', team1t)
+      } else {
+        console.error('Error during fetching');
+      }
+      setIsLoading(false); 
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const tableData1 = team1t.map((user1t) => [
+    user1t.kills,
+    user1t.deaths,
+    user1t.assists,
+    user1t.deaths !== 0 ? (user1t.kills / user1t.deaths).toFixed(2) : (user1t.kills / 1).toFixed(2),
+    user1t.total_damage,
+    user1t.head_accuracy,
   ]);
   
-  const tableData2 = team_2.map((user) => [
-    {image: user.image, username: user.username},
-    user.kills,
-    user.deaths,
-    user.assists,
-    user.deaths !== 0 ? (user.kills / user.deaths).toFixed(2) : (user.kills / 1).toFixed(2),
-    user.total_damage,
-    user.headshots,
+  const tableData2 = team1ct.map((user1ct) => [
+    user1ct.kills,
+    user1ct.deaths,
+    user1ct.assists,
+    user1ct.deaths !== 0 ? (user1ct.kills / user1ct.deaths).toFixed(1) : (user1ct.kills / 1).toFixed(1),
+    user1ct.total_damage,
+    user1ct.head_accuracy,
+  ]);
+
+  const tableData3 = team2t.map((user2t) => [
+    user2t.kills,
+    user2t.deaths,
+    user2t.assists,
+    user2t.deaths !== 0 ? (user2t.kills / user2t.deaths).toFixed(2) : (user2t.kills / 1).toFixed(2),
+    user2t.total_damage,
+    user2t.head_accuracy,
   ]);
   
+  const tableData4 = team2ct.map((user2ct) => [
+    user2ct.kills,
+    user2ct.deaths,
+    user2ct.assists,
+    user2ct.deaths !== 0 ? (user2ct.kills / user2ct.deaths).toFixed(2) : (user2ct.kills / 1).toFixed(2),
+    user2ct.total_damage,
+    user2ct.head_accuracy,
+  ]);
+
+  const playerImages = [
+    player1,
+    player2,
+    player3,
+    player4,
+    player5,
+    player6,
+    player7,
+    player8,
+    player9,
+    player10,
+
+  ];
+  const team1 = team1t.map((user1t, index) => [
+    {image: playerImages[index], username: user1t.player_ID},
+    user1t.kills + team1ct[index].kills,
+    user1t.deaths + team1ct[index].deaths,
+    user1t.assists + team1ct[index].assists,
+    user1t.deaths !== 0
+      ? ((user1t.kills + team1ct[index].kills) / (user1t.deaths + team1ct[index].deaths)).toFixed(2)
+      : ((user1t.kills + team1ct[index].kills) / 1).toFixed(2),
+    user1t.total_damage + team1ct[index].total_damage,
+    user1t.head_accuracy + team1ct[index].head_accuracy + '%',
+  ]);
+  
+  
+  const team2 = team2t.map((user2t, index) => [
+    {image: playerImages[index+5], username: user2t.player_ID},
+    user2t.kills + team2ct[index].kills,
+    user2t.deaths + team2ct[index].deaths,
+    user2t.assists + team2ct[index].assists,
+    user2t.deaths !== 0
+      ? ((user2t.kills + team2ct[index].kills) / (user2t.deaths + team2ct[index].deaths)).toFixed(2)
+      : (user2t.kills / 1).toFixed(2),
+    user2t.total_damage + team2ct[index].total_damage,
+    user2t.head_accuracy + team2ct[index].head_accuracy + '%',
+  ]);
+  
+
+  
+  
+  
+
+  useEffect(() => {
+    handleMatch();
+  }, [matchId]); // Dodaj matchId jako zależność useEffect
+
+  if (isLoading) {
+    return <p>Loading...</p>; 
+  }
   return (
     <div className='tables-container'>
-      <TableTemplate tableData={tableData1} colNames={colNames} />
-      <TableTemplate tableData={tableData2} colNames={colNames} />
+      <TableTemplate tableData={team1} colNames={colNames} />
+      <TableTemplate tableData={team2} colNames={colNames} />
     </div>
   );
 };
 
 export default MatchStats;
-// const handleUser = async () => {
-//     try {
-//         const response = await fetch('/api/$matchsts', {
-//             method: 'GET',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//         });
-//         if (response.ok){
-//             const data = await response.json();
-//             setUserData(data)
-//         } else {
-//             console.error('Error during fetching');
-//         }
-//     } catch (error) {
-//         console.error(error);
-//     }; 
-// }

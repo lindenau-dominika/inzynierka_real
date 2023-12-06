@@ -13,6 +13,7 @@ export const Gamestats = () => {
         <body>
         <MatchStats />
         </body>
+
         </>
     )
 }

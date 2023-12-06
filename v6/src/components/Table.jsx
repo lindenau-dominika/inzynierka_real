@@ -1,5 +1,7 @@
 import React from 'react';
 import '../styles/table.css';
+import { Link } from 'react-router-dom';
+import AvatarImage from '../assets/najs.jpg'
 
 export const TableTemplate = (props) => {
   const { tableData, colNames } = props;
@@ -19,20 +21,17 @@ export const TableTemplate = (props) => {
             <tr key={rowIndex}>
               {row.map((cell, colIndex) => (
                 <td key={colIndex}>
-                  {colIndex === 0 ? (
-                    // Jeśli pierwsza kolumna
+                {colIndex === 0 && cell ? (
                     <div>
-                      {typeof cell === 'object' && cell.image ? (
-                        // Jeśli wartość jest obiektem i zawiera atrybut 'image', wyświetl zdjęcie
+                    <Link to={`https://steamcommunity.com/profiles/${cell.username}`} target='_blank'>
                         <img src={cell.image} alt="avatar" className="avatar-image" />
-                      ) : null}
-                      {cell.username}
+                    </Link>
                     </div>
-                  ) : (
-                    // Jeśli to nie pierwsza kolumna, wyświetl cell
+                ) : (
                     cell
-                  )}
+                )}
                 </td>
+
               ))}
             </tr>
           ))}
