@@ -1,0 +1,37 @@
+.sidenav {
+    background: linear-gradient(180deg, #1d1d2ed5 60%, #1f1c2b63 80%);
+    filter: drop-shadow(0px 8px 17px rgba(0, 0, 0, 0.25));
+    height: 85%;
+    /* width: 12%; */
+    position: fixed;
+    top: 12%;
+    left: 1%;
+    overflow-x: hidden;
+    transition: 0.5s;
+    border-radius: 10px;
+}
+
+.sidenav:hover {
+    background-color: #443e5d39;
+    box-shadow: 0px 10px 14px rgba(0, 0, 0, 0.16); 
+}
+
+.sidenav a {
+    padding: 8px 20px 8px 20px;
+    text-decoration: none;
+    font-size: 25px;
+    display: block;
+    transition: 0.3s;
+    color: white;
+}
+
+.sidenav a:hover {
+    color: purple;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1px;
+}
