@@ -25,10 +25,10 @@ COPY --from=build /app/dist ./dist
 COPY package.json package-lock.json ./
 
 # Instalacja tylko produkcji
-RUN npm install --only=production
+RUN npm install i -g vite
 
 # Ustawienie portu, na którym nasłuchuje aplikacja
 EXPOSE 5173
 
 # Komenda uruchamiająca aplikację
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0", "--port", "5173"]
