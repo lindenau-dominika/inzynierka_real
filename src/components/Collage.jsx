@@ -77,7 +77,7 @@ export const Collage = () => {
   return (
     <Carousel show={showItems} slide={showItems} swiping={false} transition={1} autoSwipe={0}>
       {recentMaps.map((maps) => (
-        <Link to={`/statistics/${maps.match_ID}`} key={maps.match_ID}>
+        <Link to={`/statistics/${maps.match_ID}`} state={{scoreValue: `${maps.score}-${maps.score2}`, mapName: mapNames[maps.map]}} key={maps.match_ID}>
           <SingleCard
             key={maps.match_ID}
             image={mapImages[maps.map]}

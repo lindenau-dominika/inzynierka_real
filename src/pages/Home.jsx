@@ -4,6 +4,7 @@ import { Header } from '../components/Header';
 import { Collage } from '../components/Collage';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../components/AuthContext';
+import '../styles/home.css'
 
 
 const Home = () => {
@@ -15,11 +16,15 @@ const Home = () => {
 
   return (
     <>
-      <div className='col-24'>
-        <h1>Recently played</h1>
-        <Collage />
-        <Sidenav />
         <Header/>
+      <div className='col-24'>
+        <div className='col-3'>
+          <Sidenav />
+        </div>
+        <div className='col-18'>
+        <h1>Recently played</h1>
+          <Collage/>
+        </div>
       </div>
     </>
   );

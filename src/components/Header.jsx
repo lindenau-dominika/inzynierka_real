@@ -16,7 +16,7 @@ export const Header = (props) => {
                 <img src={LogoImage}  alt="Logo of omega" />
               </div>
             </Link>
-            <input className='header-input' placeholder='Compare with others'></input>
+            {/* <input className='header-input' placeholder='Compare with others'></input> */}
           <div className='profile'>
             <img src={Loop} className='loop' alt="Logo of omega" />
             <img className='avatar' src={AvatarImage} alt="your avatar" />

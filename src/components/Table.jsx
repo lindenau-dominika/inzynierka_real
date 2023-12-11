@@ -21,24 +21,30 @@ export const TableTemplate = (props) => {
             <tr key={rowIndex}>
              {row.map((cell, colIndex) => (
     <td key={colIndex}>
-        <div className='avatar-col'>{colIndex === 0 && cell ? (
-  <>
+        <div>{colIndex === 0 && cell ? (
+  <div className='avatar-col'>
     <Link to={`https://steamcommunity.com/profiles/${cell.username}`} target='_blank'>
       <img src={cell.image} alt="avatar" className="avatar-image" />
     </Link>
     {cell.nickname}
-  </>
+  </div> 
 ) : null}
 {colIndex === 1 && cell ? (
-  <div className={{alignItems: 'center'}}>
-    {cell.rating > 0 ? (
-      <div className='greatrating-col'>
+  <div style={{ alignItems: 'center' }}>
+    {cell.rating > 0 && cell.rating < 1 ? (
+      <div className='neutralrating-col'>
         {cell.rating}
       </div>
     ) : (
-      <div className='badrating-col'>
-        {cell.rating}
-      </div>
+      cell.rating >= 1 ? (
+        <div className='greatrating-col'>
+          {cell.rating}
+        </div>
+      ) : (
+        <div className='badrating-col'>
+          {cell.rating}
+        </div>
+      )
     )}
   </div>
 ) : null}

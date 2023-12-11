@@ -24,6 +24,7 @@ header {
     border-radius: 5px;
     justify-content: center;
     border: none;
+    min-height: 40px;
   }
 
 

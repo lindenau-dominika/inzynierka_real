@@ -20,12 +20,27 @@ def get_db_connection():
     connection = psycopg2.connect(connection_string)
     return connection
 
+def get_cursor():
+    return get_db_connection().cursor()
+
 conn = get_db_connection()
+
+@app.before_request
+def before_request():
+    try:
+        # Attempt to execute a simple query to check the connection status
+        with get_cursor() as cur:
+            cur.execute("SELECT 1;")
+    except psycopg2.OperationalError:
+        # Reconnect if there's an OperationalError
+        app.logger.warning("Database connection lost. Reconnecting...")
+        globals()['conn'] = get_db_connection()
+
 
 @app.route('/matches')
 def matches():
     cur = conn.cursor()
-    columns = 'match_ID, date, score, score2, map, platform, type'
+    columns = 'match_ID, demo_ID, faceit_match_id, created_at, finished_at, score, score2, map, platform'
     cur.execute(f'SELECT {columns} FROM matches;')
     matches = cur.fetchall()
     keys = columns.replace('\n', '').split(', ')
@@ -53,8 +68,8 @@ def match_stats(match_id):
         f'''
         SELECT u.steam_ID, u.username, u.avatar
         FROM users u
-        JOIN matches_stats ms ON u.steam_ID = ms.player_ID
-        WHERE ms.match_ID = {match_id};
+        JOIN matches_participants mp ON u.steam_ID = mp.player_id
+        WHERE mp.match_id = {match_id};
         '''
     )
     users_data = cur.fetchall()

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { TableTemplate } from '../components/Table';
 import '../styles/gamestats.css';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useLocation, Link } from 'react-router-dom';
 
 const MatchStats = () => {
-  const { matchId } = useParams();
+  const { matchId} = useParams();
+  const { scoreValue, mapName } = useLocation().state;
   const [team1t, setTeam1t] = useState([]);
   const [team2ct, setTeam2ct] = useState([]);
   const [team1ct, setTeam1ct] = useState([]);
@@ -47,7 +48,6 @@ const MatchStats = () => {
       console.error(error);
     }
   }
-
   const team1 = team1t.map((user1t, index) => [
     {
         image: users1[index].avatar,
@@ -87,16 +87,19 @@ const team2 = team2t.map((user2t, index) => [
 
   useEffect(() => {
     handleMatch();
-  }, [matchId]);
+  }, [matchId, scoreValue, mapName]);
 
   if (isLoading) {
     return <p>Loading...</p>; 
   }
-  return (
-    <div className='tables-container'>
+  return ( <>
+    <div className='col-3'></div>
+    <div className='tables-container col-21'>
+      <h2>{mapName} {scoreValue}</h2>
       <TableTemplate tableData={team1} colNames={colNames} />
       <TableTemplate tableData={team2} colNames={colNames} />
     </div>
+  </>
   );
 };
 export default MatchStats;

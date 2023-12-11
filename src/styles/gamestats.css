@@ -2,3 +2,11 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+h2 {
+    text-align: left;
+    font-size: 2vw;
+    color: #878da4;
+    padding: 10px;
+    /* box-shadow: 0 0 15px black; */
+}

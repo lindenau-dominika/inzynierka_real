@@ -26,22 +26,23 @@ img {
 
 
 h4 {
-    position: absolute;
     display: flex;
     top: 40px;
     margin-left: 20px;
-    color: white;
     font-size: 2vw;
     font-weight: 800;
     transition: 0.5s;
     font-family: 'Courier New', Courier, monospace;
 }
 
-.text {
+.text, h4 {
     position: absolute;
-    color: white;
+    color: white;    
+}
+
+.text {
+    top: 50%;
     font-size: 1.6vw;
-    
 }
 
 /* Dostosuj dla ekranów o szerokości do 576px
