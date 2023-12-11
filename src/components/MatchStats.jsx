@@ -48,6 +48,9 @@ const MatchStats = () => {
       console.error(error);
     }
   }
+//   Rating_overall = 
+
+// (ratingCT * rundyPoTT + ratingTT * rundyPoTT) / (rundyPoCT + rundyPoTT)
   const team1 = team1t.map((user1t, index) => [
     {
         image: users1[index].avatar,
@@ -55,7 +58,8 @@ const MatchStats = () => {
         nickname: users1[index].username
     },
     {
-        rating: user1t.rating
+        rating: (user1t.rating * (user1t.deaths + user1t.rounds_survived) + team1ct[index].rating * (team1ct[index].deaths + team1ct[index].rounds_survived))/
+        ((user1t.deaths + user1t.rounds_survived) +(team1ct[index].deaths + team1ct[index].rounds_survived))
     },
     user1t.kills + team1ct[index].kills,
     user1t.deaths + team1ct[index].deaths,
@@ -73,7 +77,8 @@ const team2 = team2t.map((user2t, index) => [
         nickname: users2[index].username
     },
     {
-        rating: user2t.rating
+      rating: (user2t.rating * (user2t.deaths + user2t.rounds_survived) + team2ct[index].rating * (team2ct[index].deaths + team2ct[index].rounds_survived))/
+      ((user2t.deaths + user2t.rounds_survived) +(team2ct[index].deaths + team2ct[index].rounds_survived))
     },
     user2t.kills + team2ct[index].kills,
     user2t.deaths + team2ct[index].deaths,

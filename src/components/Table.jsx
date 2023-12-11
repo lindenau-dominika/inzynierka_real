@@ -33,16 +33,16 @@ export const TableTemplate = (props) => {
   <div style={{ alignItems: 'center' }}>
     {cell.rating > 0 && cell.rating < 1 ? (
       <div className='neutralrating-col'>
-        {cell.rating}
+        {cell.rating.toFixed(2)}
       </div>
     ) : (
       cell.rating >= 1 ? (
         <div className='greatrating-col'>
-          {cell.rating}
+          {cell.rating.toFixed(2)}
         </div>
       ) : (
         <div className='badrating-col'>
-          {cell.rating}
+          {cell.rating.toFixed(2)}
         </div>
       )
     )}
