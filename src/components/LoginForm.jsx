@@ -27,18 +27,27 @@ const LoginForm = () => {
         },
         body: JSON.stringify(userData),
       });
-      
+      const responseUser = await fetch('/api/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      })       
       if (response.ok) {
         setProgress(true);
         const responseData = await response.text();
+        // const userData = responseData.user
         if (responseData === 'Authentication successful') {
           login();
           setProgress(false);
           alert('Logged in successfully!');
-          navigate('/home');
+          navigate(`/${userId}`);
+          console.log(responseData)
         } else {
           alert('Error during logging in. Try again');
         }
+        console.log(responseData)
       }
     } catch (error) {
       setProgress(true);

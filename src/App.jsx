@@ -11,7 +11,7 @@ function App() {
   return <>
       <Router>
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/Login" element={<LoginPage form={'LoginForm'}/>} />
           <Route path="/Register" element={<LoginPage form={'RegisterForm'}/>} />
           <Route path='*' element={<h1>PAGE NOT FOUND</h1>}/>

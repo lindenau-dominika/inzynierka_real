@@ -11,7 +11,7 @@ const user = {
 export const Header = (props) => {
     return (
         <header>
-            <Link to="/home">
+            <Link to="/">
               <div className='logo'>
                 <img src={LogoImage}  alt="Logo of omega" />
               </div>

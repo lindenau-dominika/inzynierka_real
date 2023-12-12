@@ -1,7 +1,6 @@
 import React from 'react';
 import '../styles/table.css';
 import { Link } from 'react-router-dom';
-import AvatarImage from '../assets/najs.jpg'
 
 export const TableTemplate = (props) => {
   const { tableData, colNames } = props;

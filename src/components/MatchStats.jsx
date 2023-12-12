@@ -48,9 +48,7 @@ const MatchStats = () => {
       console.error(error);
     }
   }
-//   Rating_overall = 
 
-// (ratingCT * rundyPoTT + ratingTT * rundyPoTT) / (rundyPoCT + rundyPoTT)
   const team1 = team1t.map((user1t, index) => [
     {
         image: users1[index].avatar,

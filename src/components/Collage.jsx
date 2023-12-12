@@ -71,7 +71,9 @@ export const Collage = () => {
   }, []);
 
   if (isLoading) {
-    return <p>Loading...</p>; 
+    return <div>
+    <p className='loading col-12'>Loading...</p>; 
+    </div>
   }
 
   return (

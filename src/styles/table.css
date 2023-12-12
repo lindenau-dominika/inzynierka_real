@@ -1,21 +1,23 @@
 .table-container {
     margin-bottom: 1%;
-    background-color: #1D1D2E;
+    background-color: #1d1d2edb;
     list-style-type: none;
     align-items: center;
-    border-collapse: collapse;
-   
+    border-collapse: collapse; 
 }
 
 
 table {
-    box-shadow: 0px, 10px, 5px black;    
+    box-shadow: 0px, 10px, 5px black;
+    border-radius: 10px;    
 }
 td {
     padding: 5px;
     grid-gap: 10px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    border-top: 1px solid #2a2a42;
+    background: #1d1d2e1b;
+    width: fit-content;
+    /* border-radius: 20px; */
 }
 
 tr {
@@ -35,7 +37,7 @@ td:hover {
 
 th {
     font-size: 1.2vw;
-    background-color: #161623;
+    background-color: #161623dc;
     padding: 10px;
     font-size: larger;
     border-bottom: 1px solid  #2a2a42;
@@ -49,8 +51,8 @@ th {
 }
 
 .avatar-image {
-    width: 50px;
-    height: 50px;
+    min-width: 50px;
+    min-height: 50px;
     border-radius: 10%;
     box-shadow: 2px 2px 5px #0C0C13;;
     transition: 0.3s;
@@ -81,18 +83,18 @@ th {
     padding: 5px;
 }
 .greatrating-col {
-    filter: drop-shadow(0 0 6px rgba(3, 187, 0, 0.442));
-    color: rgb(196, 255, 205);
+    filter: drop-shadow(0 0 6px #829dff74);
+    color: #92aaff;
 }
 
 .neutralrating-col {
-    filter: drop-shadow(0 0 6px rgba(187, 0, 0, 0.442));
-    color: rgb(196, 204, 255);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.442));
+    color: rgb(255, 255, 255);
 }
 
 .badrating-col {
-    filter: drop-shadow(0 0 6px rgba(187, 0, 0, 0.442));
-    color: rgb(255, 196, 196);
+    filter: drop-shadow(0 0 6px rgba(218, 146, 233, 0.442));
+    color: rgb(208, 138, 214);
 }
 
 .avatar-image:hover {

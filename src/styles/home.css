@@ -4,3 +4,10 @@ h1 {
     font-size: 3.6vw;
     color: #878da4;
 }
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
