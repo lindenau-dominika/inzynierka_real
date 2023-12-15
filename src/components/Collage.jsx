@@ -45,7 +45,7 @@ export const Collage = () => {
 
   const handleMaps = async () => {
     try {
-      const response = await fetch('/matches', {
+      const response = await fetch('/xd/matches', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
