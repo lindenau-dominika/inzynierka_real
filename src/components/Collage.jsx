@@ -54,7 +54,7 @@ export const Collage = () => {
 
       if (response.ok) {
         const data = await response.json();
-        const matchesArray = data.matches.reverse() || [];
+        const matchesArray = data.matches || [];
         setRecentMaps(matchesArray);
       } else {
         console.error('Error during fetching');

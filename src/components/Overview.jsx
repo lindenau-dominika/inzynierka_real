@@ -90,7 +90,6 @@ const OverviewStats = () => {
     const team0tt = generateTeamData(team0tt_draft);
     const team1tt = generateTeamData(team1tt_draft);
     const match = matchInfo[0];
-    console.log(matchInfo[0])
 
     return (<>
     <MatchPreview date={match.created_at} mapName={match.map} score={match.score} score2={match.score2}/>

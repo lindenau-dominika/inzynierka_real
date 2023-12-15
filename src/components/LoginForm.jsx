@@ -11,11 +11,12 @@ const LoginForm = () => {
   const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [password, setPassword] = useState('');
   const [progress, setProgress] = useState(false);
-
+  const [userInfo, setUserInfo] = useState();
   const userData = {
     usernameOrEmail,
     password,
   };
+  
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,40 +28,49 @@ const LoginForm = () => {
         },
         body: JSON.stringify(userData),
       });
-      const responseUser = await fetch('/api/user', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      })       
+    
       if (response.ok) {
-        setProgress(true);
         const responseData = await response.text();
-        // const userData = responseData.user
-        if (responseData === 'Authentication successful') {
-          login();
-          setProgress(false);
-          alert('Logged in successfully!');
-          navigate(`/${userId}`);
-          console.log(responseData)
-        } else {
-          alert('Error during logging in. Try again');
-        }
-        console.log(responseData)
+        const authToken = responseData.access_token;
+        login();
+        setProgress(false);
+        alert('Logged in successfully!');
+        navigate('/');
+        const responseUser = await fetch('/api/user', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`,
+          },
+        });
+    
+        setProgress(true);
+    
+        // if (responseUser.ok) {
+        //   const userInf = await responseUser.text();
+        //   setUserInfo(userInf);
+        //   login();
+        //   setProgress(false);
+        //   alert('Logged in successfully!');
+        //   navigate(`/${userInfo}`);
+        // } else {
+        //   const errorData = await responseUser.text();
+        //   alert(`Error: ${errorData.message}`);
+        // }
+      } else {
+        alert('Error during logging in. Try again');
       }
     } catch (error) {
       setProgress(true);
-      console.error('Error during logging proccess: ', error);
+      console.error('Error during logging process: ', error);
     }
-  };
+  }
 
   return (<div className='dif2 col-24'>
       <section className="main_container col-21" id='login'>
         <img src={LogoImage}  alt="Logo of omega" />
         <form onSubmit={handleLogin} className={`login_container ${progress ? 'progress' : ''}`}>
           <h1>Garnuchy</h1>
-          {/* <img src={LogoImage}  alt="Logo of omega" /> */}
           <div className='extra'>
             <input className='login-input'
               type="text"
