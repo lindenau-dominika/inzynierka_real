@@ -1,18 +1,19 @@
 import React from "react";
 import { Sidenav } from "../components/Sidenav";
 import { Header } from "../components/Header";
-import MatchStats from "../components/MatchStats";
 import '../styles/gamestats.css'
+import OverviewStats from "../components/Overview";
 
 export const Gamestats = () => {
     return (
         <>
-        {/* <StatsTable /> */}
+        <div className="col-3">
         <Sidenav />
-        <Header />
-        {/* <body> */}
-        <MatchStats />
-        {/* </body> */}
+        </div>
+        <div className="col-21">
+
+        <OverviewStats />
+        </div>
 
         </>
     )

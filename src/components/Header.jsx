@@ -11,17 +11,17 @@ const user = {
 export const Header = (props) => {
     return (
         <header>
-            <Link to="/">
+            {/* <Link to="/">
               <div className='logo'>
                 <img src={LogoImage}  alt="Logo of omega" />
               </div>
-            </Link>
+            </Link> */}
             {/* <input className='header-input' placeholder='Compare with others'></input> */}
-          <div className='profile'>
+          {/* <div className='profile'>
             <img src={Loop} className='loop' alt="Logo of omega" />
             <img className='avatar' src={AvatarImage} alt="your avatar" />
             <h3>{user.username}</h3>
-          </div>
+          </div> */}
         </header>
     )
 }

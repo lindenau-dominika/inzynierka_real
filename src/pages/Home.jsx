@@ -5,8 +5,6 @@ import { Collage } from '../components/Collage';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../components/AuthContext';
 import '../styles/home.css'
-import MatchesHistory from '../components/Matches';
-
 
 const Home = () => {
   const { isAuthenticated } = useAuth();
@@ -17,7 +15,7 @@ const Home = () => {
 
   return (
     <>
-        <Header/>
+        {/* <Header/> */}
         <div className='col-3'>
           <Sidenav />
         </div>
@@ -25,12 +23,13 @@ const Home = () => {
         <div className='col-23'>
         <h1>Recently played</h1>
           <Collage/>
+          {/* <OverviewStats/> */}
         </div>
         <div>
           {/* wykresy */}
         </div>
         <div className='col-23'>
-          <MatchesHistory></MatchesHistory>
+          {/* <MatchesHistory></MatchesHistory> */}
         </div>
       </div>
     </>

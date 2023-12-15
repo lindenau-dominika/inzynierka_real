@@ -1,22 +1,44 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../styles/table.css';
 import { Link } from 'react-router-dom';
 
 export const TableTemplate = (props) => {
   const { tableData, colNames } = props;
 
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
+
+  const handleSort = (key) => {
+    let direction = 'ascending';
+    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedTableData = tableData.slice().sort((a, b) => {
+    if (sortConfig.direction === 'ascending') {
+      return a[sortConfig.key] > b[sortConfig.key] ? 1 : -1;
+    } else {
+      return a[sortConfig.key] < b[sortConfig.key] ? 1 : -1;
+    }
+  });
+
   return (
-    <div>
+    <div className='tablediv'>
       <table className="table-container">
         <thead>
           <tr>
             {colNames.map((colName, index) => (
-              <th key={index}>{colName}</th>
+              <th key={index} onClick={()=> handleSort(index)}>{colName}
+              {sortConfig.key === index && (
+                <span>{sortConfig.direction === 'ascending' ? ' ▲' : ' ▼'}</span>
+              )}
+              </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {tableData.map((row, rowIndex) => (
+          {sortedTableData.map((row, rowIndex) => (
             <tr key={rowIndex}>
              {row.map((cell, colIndex) => (
     <td key={colIndex}>
@@ -30,18 +52,18 @@ export const TableTemplate = (props) => {
 ) : null}
 {colIndex === 1 && cell ? (
   <div style={{ alignItems: 'center' }}>
-    {cell.rating > 0 && cell.rating < 1 ? (
+    {cell > 0 && cell < 1 ? (
       <div className='neutralrating-col'>
-        {cell.rating.toFixed(2)}
+        {cell.toFixed(2)}
       </div>
     ) : (
-      cell.rating >= 1 ? (
+      cell >= 1 ? (
         <div className='greatrating-col'>
-          {cell.rating.toFixed(2)}
+          {cell.toFixed(2)}
         </div>
       ) : (
         <div className='badrating-col'>
-          {cell.rating.toFixed(2)}
+          {cell.toFixed(2)}
         </div>
       )
     )}

@@ -6,7 +6,11 @@
 /* } */
 .logo {
   height: 3em;
+  left: 0;
+  width: auto;
   padding: 1em;
+  justify-content: center;
+  align-items: center;
   will-change: filter;
   filter: drop-shadow(0 0 0.5px rgba(240, 241, 255, 0.5));
   transition: filter 300ms;
