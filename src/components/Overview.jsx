@@ -43,7 +43,7 @@ const OverviewStats = () => {
 
     const handleMatchOveriew = async () => {
         try {
-            const response = await fetch(`/xd/matches/${matchId}`, {
+            const response = await fetch(`/matches/${matchId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
