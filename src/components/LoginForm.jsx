@@ -28,43 +28,26 @@ const LoginForm = () => {
         },
         body: JSON.stringify(userData),
       });
-    
+
+      console.log(userInfo)
       if (response.ok) {
-        const responseData = await response.text();
-        const authToken = responseData.access_token;
-        login();
-        setProgress(false);
-        alert('Logged in successfully!');
-        navigate('/');
-        const responseUser = await fetch('/api/user', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${authToken}`,
-          },
-        });
-    
         setProgress(true);
-    
-        // if (responseUser.ok) {
-        //   const userInf = await responseUser.text();
-        //   setUserInfo(userInf);
-        //   login();
-        //   setProgress(false);
-        //   alert('Logged in successfully!');
-        //   navigate(`/${userInfo}`);
-        // } else {
-        //   const errorData = await responseUser.text();
-        //   alert(`Error: ${errorData.message}`);
-        // }
-      } else {
-        alert('Error during logging in. Try again');
+        const responseData = await response.text();
+        if (responseData === 'Authentication successful') {
+          login();
+          setProgress(false);
+          alert('Logged in successfully!');
+          navigate(`/`);
+          // console.log(responseData)
+        } else {
+          alert('Error during logging in. Try again');
+        }
       }
     } catch (error) {
       setProgress(true);
-      console.error('Error during logging process: ', error);
+      console.error('Error during logging proccess: ', error);
     }
-  }
+  };
 
   return (<div className='dif2 col-24'>
       <section className="main_container col-21" id='login'>
