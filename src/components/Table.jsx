@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import '../styles/table.css';
 import { Link } from 'react-router-dom';
 
@@ -16,10 +16,13 @@ export const TableTemplate = (props) => {
   };
 
   const sortedTableData = tableData.slice().sort((a, b) => {
+    const aValue = a[sortConfig.key];
+    const bValue = b[sortConfig.key];
+
     if (sortConfig.direction === 'ascending') {
-      return a[sortConfig.key] > b[sortConfig.key] ? 1 : -1;
+      return aValue > bValue ? 1 : -1;
     } else {
-      return a[sortConfig.key] < b[sortConfig.key] ? 1 : -1;
+      return aValue < bValue ? 1 : -1;
     }
   });
 
@@ -29,57 +32,64 @@ export const TableTemplate = (props) => {
         <thead>
           <tr>
             {colNames.map((colName, index) => (
-              <th key={index} onClick={()=> handleSort(index)}>{colName}
-              {sortConfig.key === index && (
-                <span>{sortConfig.direction === 'ascending' ? ' ▲' : ' ▼'}</span>
-              )}
+              <th key={index} onClick={() => handleSort(index)}>
+                {colName}
+                {sortConfig.key === index && (
+                  <span>{sortConfig.direction === 'ascending'}</span>
+                )}
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {sortedTableData.map((row, rowIndex) => (
-            <tr key={rowIndex}>
-             {row.map((cell, colIndex) => (
-    <td key={colIndex}>
-        <div>{colIndex === 0 && cell ? (
-  <div className='avatar-col'>
-    <Link to={`https://steamcommunity.com/profiles/${cell.username}`} target='_blank'>
-      <img src={cell.image} alt="avatar" className="avatar-image" />
-    </Link>
-    {cell.nickname}
-  </div> 
-) : null}
-{colIndex === 1 && cell ? (
-  <div style={{ alignItems: 'center' }}>
-    {cell > 0 && cell < 1 ? (
-      <div className='neutralrating-col'>
-        {cell.toFixed(2)}
-      </div>
-    ) : (
-      cell >= 1 ? (
-        <div className='greatrating-col'>
-          {cell.toFixed(2)}
-        </div>
-      ) : (
-        <div className='badrating-col'>
-          {cell.toFixed(2)}
-        </div>
-      )
-    )}
-  </div>
-) : null}
-{colIndex !== 0 && colIndex !== 1 && cell ? (
-  <div className='all-col'>
-    {cell}
-  </div>
-) : null}
-
-                  </div>
-              </td>
-          ))}
+          {sortedTableData.length === 0 ? (
+            <tr>
+              <td colSpan={colNames.length} className="empty-table-cell">No data available</td>
             </tr>
-          ))}
+          ) : (
+            sortedTableData.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {row.map((cell, colIndex) => (
+                  <td key={colIndex}>
+                    <div>
+                      {colIndex === 0 && cell ? (
+                        <div className='avatar-col'>
+                          <Link to={`https://steamcommunity.com/profiles/${cell.username}`} target='_blank'>
+                            <img src={cell.image} alt="avatar" className="avatar-image" />
+                          </Link>
+                          {cell.nickname}
+                        </div>
+                      ) : null}
+                      {colIndex === 1 && cell ? (
+                        <div style={{ alignItems: 'center' }}>
+                          {cell > 0 && cell < 1 ? (
+                            <div className='neutralrating-col'>
+                              {cell.toFixed(2)}
+                            </div>
+                          ) : (
+                            cell >= 1 ? (
+                              <div className='greatrating-col'>
+                                {cell.toFixed(2)}
+                              </div>
+                            ) : (
+                              <div className='badrating-col'>
+                                {cell.toFixed(2)}
+                              </div>
+                            )
+                          )}
+                        </div>
+                      ) : null}
+                      {colIndex !== 0 && colIndex !== 1 && cell !== undefined ? (
+                        <div className='all-col'>
+                          {cell !== 0 ? cell : 0}
+                        </div>
+                      ) : null}
+                    </div>
+                  </td>
+                ))}
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>

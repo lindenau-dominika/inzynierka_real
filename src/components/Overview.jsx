@@ -4,22 +4,12 @@ import '../styles/gamestats.css';
 import { useParams, useLocation, Link } from 'react-router-dom';
 
 
-export const MatchPreview = (props) => {
-    return (
-        <div>
-            <h3>{props.date}</h3>
-            <h3>{props.mapName}</h3>
-            <h2>{`${props.score}-${props.score2}`}</h2>
-        </div>
-    )
-}
-
 const OverviewStats = () => {
     const {matchId} = useParams();
     const [ overallStats, setOverallStats ] = useState();
     const [ ctStats, setctStats ] = useState();
     const [ ttStats, setttStats ] = useState();
-    const [ matchInfo, setmatchInfo] = useState();
+    // const [ matchInfo, setmatchInfo] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const [TTsided, setTTsided] = useState(false);
     const [CTsided, setCTsided] = useState(false);
@@ -55,11 +45,11 @@ const OverviewStats = () => {
                 const overall_stats = data.match_overall_stats || [];
                 const ct_stats = data.match_ct_stats || [];
                 const tt_stats = data.match_tt_stats || [];
-                const matches_info = data.match_info || [];
+                // const matches_info = data.match_info || [];
                 setOverallStats(overall_stats);
                 setctStats(ct_stats);
                 setttStats(tt_stats);
-                setmatchInfo(matches_info);
+                // setmatchInfo(matches_info);
                 setIsLoading(false);
             } else {
                 console.error('Error during fetching overall stats')
@@ -89,14 +79,14 @@ const OverviewStats = () => {
     const team1ct = generateTeamData(team1ct_draft);
     const team0tt = generateTeamData(team0tt_draft);
     const team1tt = generateTeamData(team1tt_draft);
-    const match = matchInfo[0];
+
+    // const match = matchInfo[0];
 
     return (<>
-    <MatchPreview date={match.created_at} mapName={match.map} score={match.score} score2={match.score2}/>
-    <div className='side_buttons_container'>
-            <button className={`side_buttons ${CTsided ? 'ct_selected': ''}`} onClick={() => {setCTsided(true); setOverall(false); setTTsided(false)}} type='button'>Counter-terrorists Side</button>
-            <button className={`side_buttons ${Overall ? 'oall_selected': ''}`} onClick={() => {setCTsided(false); setOverall(true); setTTsided(false)}} type='button'>Overall</button>
-            <button className={`side_buttons ${TTsided ? 'terro_selected': ''}`} onClick={() => {setCTsided(false); setOverall(false); setTTsided(true);}} type='button'>Terrorists Side</button>
+    <div className='side-buttons-container'>
+            <button className={`side-buttons ${CTsided ? 'ct-selected': ''}`} onClick={() => {setCTsided(true); setOverall(false); setTTsided(false)}} type='button'>Counter-terrorists Side</button>
+            <button className={`side-buttons ${Overall ? 'oall-selected': ''}`} onClick={() => {setCTsided(false); setOverall(true); setTTsided(false)}} type='button'>Overall</button>
+            <button className={`side-buttons ${TTsided ? 'terro-selected': ''}`} onClick={() => {setCTsided(false); setOverall(false); setTTsided(true);}} type='button'>Terrorists Side</button>
     </div>
             {CTsided ? ( <div>
                 <div className='ct-container'>
@@ -131,3 +121,22 @@ const OverviewStats = () => {
 }
 
 export default OverviewStats; 
+
+
+// const buttonData = [
+//     { label: 'General', state: isGeneral, action: () => { setIsGeneral(true); setIsMKC(false); setIsUtility(false); } },
+//     { label: 'Multikills and Clutches TODO', state: isMKC, action: () => { setIsGeneral(false); setIsMKC(true); setIsUtility(false); } },
+//     // { label: 'Utility TODO', state: isUtility, action: () => { setIsGeneral(false); setIsMKC(false); setIsUtility(true); } },
+//     // Dodaj kolejne przyciski według potrzeb
+//   ];
+
+
+// {buttonData.map((button, index) => (
+//     <button
+//         key={index}
+//         className={`side-buttons ${button.state ? 'ct-selected' : ''}`}
+//         onClick={button.action}
+//         type='button'>
+//         {button.label}
+//     </button>
+//     ))}

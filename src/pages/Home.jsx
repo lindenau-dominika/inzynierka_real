@@ -1,10 +1,10 @@
 import React from 'react';
 import { Sidenav } from '../components/Sidenav';
-import { Header } from '../components/Header';
 import { Collage } from '../components/Collage';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../components/AuthContext';
 import '../styles/home.css'
+import MatchesHistory from '../components/MatchHistory';
 
 const Home = () => {
   const { isAuthenticated } = useAuth();
@@ -15,7 +15,6 @@ const Home = () => {
 
   return (
     <>
-        {/* <Header/> */}
         <div className='col-3'>
           <Sidenav />
         </div>
@@ -29,7 +28,7 @@ const Home = () => {
           {/* wykresy */}
         </div>
         <div className='col-23'>
-          {/* <MatchesHistory></MatchesHistory> */}
+          <MatchesHistory />
         </div>
       </div>
     </>

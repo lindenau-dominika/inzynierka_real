@@ -1,0 +1,13 @@
+.lists-container {
+    justify-content: center;
+    text-align: center;
+    font-weight: 500;
+ }
+
+ .lists-container:hover {
+    cursor:pointer;
+ }
+
+ .extra-tr:hover {
+    color:#c0c0ff;
+ }

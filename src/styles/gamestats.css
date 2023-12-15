@@ -12,17 +12,11 @@ body {
 h2 {
     text-align: left;
     font-size: 2vw;
-    color: #878da4;
+    /* color: #878da4; */
     padding: 10px;
 }
 
-.side_buttons_container {
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-}
-
-.side_buttons {
+.side-buttons {
     color: white;
     justify-content: center;
     width: 100%;
@@ -30,28 +24,59 @@ h2 {
     margin: 0;
     margin-bottom: 0;
 }
-.terro_selected {
+.terro-selected {
     color: rgb(214, 138, 138);
     justify-content: center;
     background-color: #161623dc;    
     width: 100%;
     border-radius: 0;
 }
-.ct_selected {
+.ct-selected {
     color: #92aaff;
-    justify-content: center;
+    /* justify-content: center; */
     background-color: #161623dc;    
     width: 100%;
     border-radius: 0;
 }
 
-.oall_selected {
+.oall-selected {
     color: #ffffff;
     justify-content: center;
     background-color: #161623dc;    
     width: 100%;
     border-radius: 0;
 }
+
+
 .super {
     color: white;
+}
+
+.side-buttons-container {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+
+.match-buttons-container {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    font-size: larger;
+    box-shadow: none;
+}
+.match-buttons {
+    color: white;
+    width: 100%;
+    border-radius: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+.overview-selected {
+    color:#b5c5ff;
+    justify-content: center;
+    background-color: #161623dc;    
+    box-shadow: none;
 }

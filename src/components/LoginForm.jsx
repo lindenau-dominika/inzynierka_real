@@ -11,7 +11,7 @@ const LoginForm = () => {
   const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [password, setPassword] = useState('');
   const [progress, setProgress] = useState(false);
-  const [userInfo, setUserInfo] = useState();
+
   const userData = {
     usernameOrEmail,
     password,
@@ -29,7 +29,6 @@ const LoginForm = () => {
         body: JSON.stringify(userData),
       });
 
-      console.log(userInfo)
       if (response.ok) {
         setProgress(true);
         const responseData = await response.text();

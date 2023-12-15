@@ -1,31 +1,44 @@
 import React from 'react';
-import '../styles/list.css';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import '../styles/table.css';
+import '../styles/list.css';
 
-const ListTemplate = (props) => {
-    const { tableData, colNames } = props;
-    return (
-      <div>
-        <table>
-          <thead>
-            <tr>
-              {colNames.map((colName, index) => (
-                <th key={index}>{colName}</th>
+const ListTemplate = ({ listData, colNames }) => {
+  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+
+  const handleRowClick = (item) => {
+    navigate(`/statistics/${item.matchId}`);
+  };
+
+  return (
+    <div className='lists-container'>
+      <table className='table-container'>
+        <thead>
+          <tr>
+            {colNames.map((colName, index) => (
+              <th key={index}>{colName}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {listData.map((item, index) => (
+            <tr className='extra-tr' key={index} onClick={() => handleRowClick(item)}>
+              {colNames.map((colName, colIndex) => (
+                <td key={colIndex}>
+                  {colIndex === 0 ? (
+                    item[colName.toLowerCase()]
+                  ) : (
+                    item[colName.toLowerCase()]
+                  )}
+                </td>
               ))}
             </tr>
-          </thead>
-          <tbody>
-            {tableData.map((row, rowIndex) => (
-              <tr key={rowIndex}>
-                {row.map((cell, colIndex) => (
-                  <td key={colIndex}>{cell}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  };
-  
-  export default ListTemplate;
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default ListTemplate;
