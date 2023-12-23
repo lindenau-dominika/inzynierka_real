@@ -35,6 +35,7 @@ export const MatchDetails = () => {
     const [ttAim, setTtAim] = useState();
     const [Weapons, setWeapons] = useState();
     const [hitGroup, setHitGroup] = useState();
+    const [isWeapons, setIsWeapons] = useState();
 
     const generateGeneralData = (teamStats) => {
         return teamStats.map((user) => [
@@ -174,7 +175,7 @@ export const MatchDetails = () => {
         }
         
     } catch(error) {
-        error(error);
+        console.error(error);
     }
 }
 
@@ -252,6 +253,7 @@ useEffect(() => {
     handleGeneralStats();
     handleUtilityStats();
     handleTradesOKStats();
+    handleAimStats();
 }, [matchId]);
 
 if (isLoading) {
@@ -290,10 +292,12 @@ const t1TtTrades = generateTradesOKData(ttTradesOK.filter(user => user.team === 
     
     return (<>
     <div className='match-buttons-container'>
-        <button className={`side-buttons ${isGeneral ? 'ct-selected': ''}`} onClick={() => {setIsGeneral(true); setIsClutches(false); setIsUtility(false); setIsTradesOK(false)}} type='button'>General</button>
-        <button className={`side-buttons ${isClutches ? 'ct-selected': ''}`} onClick={() => {setIsGeneral(false); setIsClutches(true); setIsUtility(false); setIsTradesOK(false)}} type='button'>Clutches</button>
-        <button className={`side-buttons ${isUtility ? 'ct-selected': ''}`} onClick={() => {setIsGeneral(false); setIsClutches(false); setIsUtility(true); setIsTradesOK(false)}} type='button'>Utility</button>
-        <button className={`side-buttons ${isTradesOK ? 'ct-selected': ''}`} onClick={() => {setIsGeneral(false); setIsClutches(false); setIsUtility(false); setIsTradesOK(true)}} type='button'>Trades & ok</button>
+        <button className={`side-buttons ${isGeneral ? 'ct-selected': ''}`} onClick={() => {setIsGeneral(true); setIsClutches(false); setIsUtility(false); setIsTradesOK(false); setIsAim(false)}} type='button'>General</button>
+        <button className={`side-buttons ${isClutches ? 'ct-selected': ''}`} onClick={() => {setIsGeneral(false); setIsClutches(true); setIsUtility(false); setIsTradesOK(false); setIsAim(false)}} type='button'>Clutches</button>
+        <button className={`side-buttons ${isUtility ? 'ct-selected': ''}`} onClick={() => {setIsGeneral(false); setIsClutches(false); setIsUtility(true); setIsTradesOK(false); setIsAim(false)}} type='button'>Utility</button>
+        <button className={`side-buttons ${isTradesOK ? 'ct-selected': ''}`} onClick={() => {setIsGeneral(false); setIsClutches(false); setIsUtility(false); setIsTradesOK(true); setIsAim(false)}} type='button'>Trades & ok</button>
+        <button className={`side-buttons ${isAim? 'ct-selected': ''}`} onClick={() => {setIsGeneral(false); setIsClutches(false); setIsUtility(false); setIsTradesOK(false); setIsAim(true)}} type='button'>Aim</button>
+        
         {/* <button className={`side-buttons ${isClutches ? 'ct-selected': ''}`} onClick={() => {isGeneral(false); isClutches(true); isUtility(false)}} type='button'>Trades and Opening Kills TODO</button>
         <button className={`side-buttons ${isClutches ? 'ct-selected': ''}`} onClick={() => {isGeneral(false); isClutches(true); isUtility(false)}} type='button'>Aim TODO</button>
     <button className={`side-buttons ${isClutches ? 'ct-selected': ''}`} onClick={() => {isGeneral(false); isClutches(true); isUtility(false)}} type='button'>Other TODO</button> */}
@@ -303,7 +307,9 @@ const t1TtTrades = generateTradesOKData(ttTradesOK.filter(user => user.team === 
             <button className={`side-buttons ${CTsided ? 'ct-selected': ''}`} onClick={() => {setCTsided(true); setOverall(false); setTTsided(false)}} type='button'>Counter-terrorists Side</button>
             <button className={`side-buttons ${Overall ? 'oall-selected': ''}`} onClick={() => {setCTsided(false); setOverall(true); setTTsided(false)}} type='button'>Overall</button>
             <button className={`side-buttons ${TTsided ? 'terro-selected': ''}`} onClick={() => {setCTsided(false); setOverall(false); setTTsided(true);}} type='button'>Terrorists Side</button>
-            {isAim? (<button></button>) : null}
+            <>
+            {isAim? (<button className={`side-buttons ${isWeapons ? 'oall-selected': ''}`}>Weapon Stats</button>) : null}
+            </>
     </div>
         {isGeneral & Overall? (<>
             <div className='oall-container'>
