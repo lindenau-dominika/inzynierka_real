@@ -20,22 +20,22 @@ export const MatchDetails = () => {
     const [ttClutches, setTtClutches] = useState([]);
 
     const [isUtility, setIsUtility] = useState(false);
-    const [Utility, setUtility] = useState(false);
-    const [ctUtility, setCtUtility] = useState(false);
-    const [ttUtility, setTtUtility] = useState(false);
+    const [Utility, setUtility] = useState([]);
+    const [ctUtility, setCtUtility] = useState([]);
+    const [ttUtility, setTtUtility] = useState([]);
 
     const [isTradesOK, setIsTradesOK] = useState(false);
-    const [TradesOK, setTradesOK] = useState(false);
-    const [ctTradesOK, setCtTradesOK] = useState(false);
-    const [ttTradesOK, setTtTradesOK] = useState();
+    const [TradesOK, setTradesOK] = useState([]);
+    const [ctTradesOK, setCtTradesOK] = useState([]);
+    const [ttTradesOK, setTtTradesOK] = useState([]);
 
     const [isAim, setIsAim] = useState(false);
-    const [Aim, setAim] = useState();
-    const [ctAim, setCtAim] = useState();
-    const [ttAim, setTtAim] = useState();
-    const [Weapons, setWeapons] = useState();
-    const [hitGroup, setHitGroup] = useState();
-    const [isWeapons, setIsWeapons] = useState();
+    const [isWeapons, setIsWeapons] = useState(false);
+    const [Aim, setAim] = useState([]);
+    const [ctAim, setCtAim] = useState([]);
+    const [ttAim, setTtAim] = useState([]);
+    const [Weapons, setWeapons] = useState([]);
+    const [hitGroup, setHitGroup] = useState([]);
 
     const generateGeneralData = (teamStats) => {
         return teamStats.map((user) => [
@@ -51,9 +51,9 @@ export const MatchDetails = () => {
             user.hs_kill_percent,
             user.rounds_survived,
         ]);
-      };
+    };
 
-      const generateClutchesData = (teamStats) => {
+    const generateClutchesData = (teamStats) => {
         return teamStats.map((user) => [
             {
                 image: user.avatar,
@@ -75,9 +75,9 @@ export const MatchDetails = () => {
             user._1v4_won,
             user._1v5_won,
         ]);
-      };
+    };
 
-      const generateUtilityData = (teamStats) => {
+    const generateUtilityData = (teamStats) => {
         return teamStats.map((user) => [
             {
                 image: user.avatar,
@@ -98,9 +98,9 @@ export const MatchDetails = () => {
             user.smokes_thrown,
             user.molos_thrown
         ]);
-      }
+    };
 
-      const generateTradesOKData = (teamStats) => {
+    const generateTradesOKData = (teamStats) => {
         return teamStats.map((user) => [
             {
                 image: user.avatar,
@@ -114,8 +114,34 @@ export const MatchDetails = () => {
             user.opening_attempts,
             user.opening_success,
             user.opening_traded,
+        ]);
+    };
+
+    const generateAimStats = (teamStats) => {
+        return teamStats.map((user) => [
+            {
+                image: user.avatar,
+                nickname: user.username,
+            },
+            user.null,
+            user.kills,
+            user.total_damage,
+            user.hs_kill_percent,
+            user.accuracy_percent,
+            user.head_hit_percent, 
+            user.shots_fired,
+        ]);
+    };
+
+    const generateWeaponStats = (userWeapons) => {
+        return userWeapons.map((weapon) => [
+            weapon.null,
+            weapon.null,
+            weapon.item_name,
+            weapon.hits,
+            weapon.group_name
         ])
-      }
+    }
 
     const GenColNames = [ 'Username','Rating', 'Kills', 'Deaths', 'K/D Ratio', 'Total Damage', 'Hs kill %', 'Rounds Survived'];
     
@@ -127,6 +153,9 @@ export const MatchDetails = () => {
     
     const TradesColNames = ['Username', '', 'Trade Kills Attempts', 'Trade Kills Success', 'Traded Death Attempts', 'Traded Death Success',
         'Opening attempts', 'Opening success', 'Openings traded'];
+
+    const AimColNames = ['username', '','kills', 'total damage',
+    'hs kill percent', 'accuracy percent', 'head hit percent', 'shots fired']
 
     const handleGeneralStats = async () => {
         try {
@@ -154,6 +183,7 @@ export const MatchDetails = () => {
         }
     } 
 
+
     const handleClutchesStats = async () => {
         try {
             const response = await fetch(`/xd/matches/${matchId}/details/clutches`, {
@@ -166,18 +196,15 @@ export const MatchDetails = () => {
             const clutches = data.match_details_clutches_stats || [];
             const ct_clutches = data.match_details_clutches_ct_stats || [];
             const tt_clutches = data.match_details_clutches_tt_stats || [];
-            // console.log(data)
             setClutches(clutches);
             setCtClutches(ct_clutches);
             setTtClutches(tt_clutches);
-        } else {
-            console.error('Error during fetching clutches')
-        }
-        
-    } catch(error) {
+            } else {
+            console.error('Error during fetching clutches')}
+            } catch(error) {
         console.error(error);
+        }
     }
-}
 
     const handleUtilityStats = async () => {
         try {
@@ -193,7 +220,6 @@ export const MatchDetails = () => {
                 setUtility(utility);
                 setCtUtility(utility_ct);
                 setTtUtility(utility_tt);
-                console.log(utility)
             } else {
                 console.error('Error during fetching utility')
             }
@@ -247,15 +273,16 @@ export const MatchDetails = () => {
             console.error(error);
         }
     }
-
-useEffect(() => {
-    handleClutchesStats(); 
-    handleGeneralStats();
-    handleUtilityStats();
-    handleTradesOKStats();
-    handleAimStats();
-}, [matchId]);
-
+    
+    useEffect(() => {
+        handleClutchesStats(); 
+        handleGeneralStats();
+        handleUtilityStats();
+        handleTradesOKStats();
+        handleAimStats();
+    }, [matchId]);
+    
+    console.log(hitGroup)
 if (isLoading) {
     return <p>Loading...</p>
 }
@@ -287,6 +314,15 @@ const t1CtTrades = generateTradesOKData(ctTradesOK.filter(user => user.team === 
 const t0TtTrades = generateTradesOKData(ttTradesOK.filter(user => user.team === 0)) || [];
 const t1TtTrades = generateTradesOKData(ttTradesOK.filter(user => user.team === 1)) || [];
 
+const t0Aim = generateAimStats(Aim.filter(user => user.team === 0)) || [];
+const t1Aim = generateAimStats(Aim.filter(user => user.team === 1)) || [];
+const t0CtAim = generateAimStats(ctAim.filter(user => user.team === 0)) || [];
+const t1CtAim = generateAimStats(ctAim.filter(user => user.team === 1)) || [];
+const t0TtAim = generateAimStats(ttAim.filter(user => user.team === 0)) || [];
+const t1TtAim = generateAimStats(ttAim.filter(user => user.team === 1)) || [];
+
+const weapon = generateWeaponStats(Weapons.filter(weapon => weapon.team ===0)) || [];
+
 
 
     
@@ -296,7 +332,7 @@ const t1TtTrades = generateTradesOKData(ttTradesOK.filter(user => user.team === 
         <button className={`side-buttons ${isClutches ? 'ct-selected': ''}`} onClick={() => {setIsGeneral(false); setIsClutches(true); setIsUtility(false); setIsTradesOK(false); setIsAim(false)}} type='button'>Clutches</button>
         <button className={`side-buttons ${isUtility ? 'ct-selected': ''}`} onClick={() => {setIsGeneral(false); setIsClutches(false); setIsUtility(true); setIsTradesOK(false); setIsAim(false)}} type='button'>Utility</button>
         <button className={`side-buttons ${isTradesOK ? 'ct-selected': ''}`} onClick={() => {setIsGeneral(false); setIsClutches(false); setIsUtility(false); setIsTradesOK(true); setIsAim(false)}} type='button'>Trades & ok</button>
-        <button className={`side-buttons ${isAim? 'ct-selected': ''}`} onClick={() => {setIsGeneral(false); setIsClutches(false); setIsUtility(false); setIsTradesOK(false); setIsAim(true)}} type='button'>Aim</button>
+        <button className={`side-buttons ${isAim ? 'ct-selected': ''}`} onClick={() => {setIsGeneral(false); setIsClutches(false); setIsUtility(false); setIsTradesOK(false); setIsAim(true)}} type='button'>Aim</button>
         
         {/* <button className={`side-buttons ${isClutches ? 'ct-selected': ''}`} onClick={() => {isGeneral(false); isClutches(true); isUtility(false)}} type='button'>Trades and Opening Kills TODO</button>
         <button className={`side-buttons ${isClutches ? 'ct-selected': ''}`} onClick={() => {isGeneral(false); isClutches(true); isUtility(false)}} type='button'>Aim TODO</button>
@@ -304,11 +340,11 @@ const t1TtTrades = generateTradesOKData(ttTradesOK.filter(user => user.team === 
 
     </div>
     <div className='side-buttons-container'>
-            <button className={`side-buttons ${CTsided ? 'ct-selected': ''}`} onClick={() => {setCTsided(true); setOverall(false); setTTsided(false)}} type='button'>Counter-terrorists Side</button>
-            <button className={`side-buttons ${Overall ? 'oall-selected': ''}`} onClick={() => {setCTsided(false); setOverall(true); setTTsided(false)}} type='button'>Overall</button>
-            <button className={`side-buttons ${TTsided ? 'terro-selected': ''}`} onClick={() => {setCTsided(false); setOverall(false); setTTsided(true);}} type='button'>Terrorists Side</button>
+            <button className={`side-buttons ${CTsided ? 'ct-selected': ''}`} onClick={() => {setCTsided(true); setOverall(false); setTTsided(false); setIsWeapons(false)}} type='button'>Counter-terrorists Side</button>
+            <button className={`side-buttons ${Overall ? 'oall-selected': ''}`} onClick={() => {setCTsided(false); setOverall(true); setTTsided(false); setIsWeapons(false)}} type='button'>Overall</button>
+            <button className={`side-buttons ${TTsided ? 'terro-selected': ''}`} onClick={() => {setCTsided(false); setOverall(false); setTTsided(true); setIsWeapons(false)}} type='button'>Terrorists Side</button>
             <>
-            {isAim? (<button className={`side-buttons ${isWeapons ? 'oall-selected': ''}`}>Weapon Stats</button>) : null}
+            {isAim? (<button className={`side-buttons ${isWeapons ? 'oall-selected': ''}`} onClick={() => {setCTsided(false); setOverall(false); setTTsided(false); setIsWeapons(true)}}>Weapon Stats</button>) : null}
             </>
     </div>
         {isGeneral & Overall? (<>
@@ -413,6 +449,35 @@ const t1TtTrades = generateTradesOKData(ttTradesOK.filter(user => user.team === 
             </div>
             <div className='terro-container'>
                 <TableTemplate tableData={t1TtTrades} colNames={TradesColNames}/>
+            </div></>
+        ) : null}
+                {isAim & Overall ? (<>
+            <div className='oall-container'>
+                <TableTemplate tableData={t0Aim} colNames={AimColNames}/>
+            </div>
+            <div className='oall-container'>
+                <TableTemplate tableData={t1Aim} colNames={AimColNames}/>
+            </div></>
+        ) : null}
+                {isAim & CTsided ? (<>
+            <div className='ct-container'>
+                <TableTemplate tableData={t0CtAim} colNames={AimColNames}/>
+            </div>
+            <div className='ct-container'>
+                <TableTemplate tableData={t1CtAim} colNames={AimColNames}/>
+            </div></>
+        ) : null}
+                {isAim & TTsided ? (<>
+            <div className='terro-container'>
+                <TableTemplate tableData={t0TtAim} colNames={AimColNames}/>
+            </div>
+            <div className='terro-container'>
+                <TableTemplate tableData={t1TtAim} colNames={AimColNames}/>
+            </div></>
+        ) : null}
+                {isAim & isWeapons ? (<>
+            <div className='terro-container'>
+                <TableTemplate tableData={weapon} colNames={AimColNames}/>
             </div></>
         ) : null}
     </>
