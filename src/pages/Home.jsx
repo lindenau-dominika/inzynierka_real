@@ -7,11 +7,11 @@ import '../styles/home.css'
 import MatchesHistory from '../components/MatchHistory';
 
 const Home = () => {
-  const { isAuthenticated } = useAuth();
+  // const { isAuthenticated } = useAuth();
 
-  if (!isAuthenticated) {
-    return <Navigate to='/login'/>
-  }
+  // if (!isAuthenticated) {
+  //   return <Navigate to='/login'/>
+  // }
 
   return (
     <>
