@@ -80,3 +80,12 @@ h2 {
     background-color: #161623dc;    
     box-shadow: none;
 }
+
+select {
+    background-color: black;
+}
+
+option {
+
+    color: white;
+}
