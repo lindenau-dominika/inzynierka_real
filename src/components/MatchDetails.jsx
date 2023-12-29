@@ -129,8 +129,8 @@ const t0General = generateGeneralData(General.filter(user => user.team === 0)) |
 const t1General = generateGeneralData(General.filter(user => user.team === 1)) || [];
 const t0CtGeneral = generateGeneralData(ctGeneral.filter(user => user.team === 0)) || [];
 const t1CtGeneral = generateGeneralData(ctGeneral.filter(user => user.team === 1)) || [];
-const t0TtGeneral = generateGeneralData(ttGeneral.filter(user => user.team === 0));
-const t1TtGeneral = generateGeneralData(ttGeneral.filter(user => user.team === 1));
+const t0TtGeneral = generateGeneralData(ttGeneral.filter(user => user.team === 0)) || [];
+const t1TtGeneral = generateGeneralData(ttGeneral.filter(user => user.team === 1)) || [];
 
 const t0Clutches = generateClutchesData(Clutches.filter(user => user.team === 0)) || [];
 const t1Clutches = generateClutchesData(Clutches.filter(user => user.team === 1)) || [];
