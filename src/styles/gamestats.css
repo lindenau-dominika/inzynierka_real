@@ -1,28 +1,30 @@
 body {
     display: flex;
     flex-direction: column;
+    /* width: 90%; */
 }
 .stats-container {
     display: flex;
     flex-direction: column;
-    /* width: 100%; */
+    width: 90%;
     justify-content: center;
     align-items: center;
+    
 }
 h2 {
     text-align: left;
-    font-size: 2vw;
+    font-size: 1.2vw;
     /* color: #878da4; */
-    padding: 10px;
+    padding: 8px;
 }
 
 .side-buttons {
     color: white;
     justify-content: center;
     width: 100%;
+    font-size: 0.9vw;
     border-radius: 0;
     margin: 0;
-    margin-bottom: 0;
 }
 .terro-selected {
     color: rgb(214, 138, 138);
@@ -30,13 +32,16 @@ h2 {
     background-color: #161623dc;    
     width: 100%;
     border-radius: 0;
+    font-size: 0.9vw;
+
 }
 .ct-selected {
     color: #92aaff;
-    /* justify-content: center; */
     background-color: #161623dc;    
     width: 100%;
     border-radius: 0;
+    font-size: 0.9vw;
+
 }
 
 .oall-selected {
@@ -45,6 +50,7 @@ h2 {
     background-color: #161623dc;    
     width: 100%;
     border-radius: 0;
+    font-size: 0.9vw;
 }
 
 
@@ -56,6 +62,7 @@ h2 {
     display: flex;
     flex-direction: row;
     text-align: center;
+    
 }
 
 
@@ -69,6 +76,8 @@ h2 {
 .match-buttons {
     color: white;
     width: 100%;
+    padding: 7px;
+    font-size: 1vw;
     border-radius: 0;
     margin: 0;
     justify-content: center;

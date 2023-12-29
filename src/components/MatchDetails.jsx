@@ -5,6 +5,8 @@ import '../styles/gamestats.css';
 
 export const MatchDetails = () => {
     const {matchId} = useParams();
+    const [selectedPlayerWeapons, setSelectedPlayerWeapons] = useState([]);
+    const [selectedSteamId, setSelectedSteamId] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const [isGeneral, setIsGeneral] = useState(true);
     const [Overall, setOverall] = useState(true);
@@ -13,30 +15,30 @@ export const MatchDetails = () => {
     const [General, setGeneral] = useState([]);
     const [ctGeneral, setCtGeneral] = useState([]);
     const [ttGeneral, setTtGeneral] = useState([]);
-
+    const [chosenWeapons, setChosenWeapons] = useState([]);
+    
     const [isClutches, setIsClutches] = useState(false);
     const [Clutches, setClutches] = useState([]); //Clutches
     const [ctClutches, setCtClutches] = useState([]);
     const [ttClutches, setTtClutches] = useState([]);
-
+    
     const [isUtility, setIsUtility] = useState(false);
     const [Utility, setUtility] = useState([]);
     const [ctUtility, setCtUtility] = useState([]);
     const [ttUtility, setTtUtility] = useState([]);
-
+    
     const [isTradesOK, setIsTradesOK] = useState(false);
     const [TradesOK, setTradesOK] = useState([]);
     const [ctTradesOK, setCtTradesOK] = useState([]);
     const [ttTradesOK, setTtTradesOK] = useState([]);
-
+    
     const [isAim, setIsAim] = useState(false);
     const [isWeapons, setIsWeapons] = useState(false);
     const [Aim, setAim] = useState([]);
     const [ctAim, setCtAim] = useState([]);
     const [ttAim, setTtAim] = useState([]);
     const [Weapons, setWeapons] = useState([]);
-    const [hitGroup, setHitGroup] = useState([]);
-
+    
     const generateGeneralData = (teamStats) => {
         return teamStats.map((user) => [
             {
@@ -52,6 +54,15 @@ export const MatchDetails = () => {
             user.rounds_survived,
         ]);
     };
+    const GenColNames = [ 'Username','Rating', 'Kills', 'Deaths', 'K/D Ratio', 'Total Damage', 'Hs kill %', 'Rounds Survived'];
+    
+    const generateSelectedPlayer = (playersWeapon) => {
+        return playersWeapon.map((player) => [
+            player.username,
+            player.avatar,
+            player.steam_id,
+        ])
+    }
 
     const generateClutchesData = (teamStats) => {
         return teamStats.map((user) => [
@@ -76,6 +87,8 @@ export const MatchDetails = () => {
             user._1v5_won,
         ]);
     };
+    const ClutchColNames = ['username', '','_2k', '_3k', '_4k', '_5k',
+    '_1v1', '_1v2', '_1v3', '_1v4', '_1v5', '_1v1_won', '_1v2_won', '_1v3_won', '_1v4_won', '_1v5_won']
 
     const generateUtilityData = (teamStats) => {
         return teamStats.map((user) => [
@@ -99,6 +112,9 @@ export const MatchDetails = () => {
             user.molos_thrown
         ]);
     };
+    const UtilityColNames = ['Username','', 'Enemies flashed', 'Flash assists', 'Friends flashed', 'Self-flashed', 'HE Damage', 'Molotov damage',
+        'AVG Blind Time', 'AVG unused Util Value', 'HE\'s thrown', 'Decoys thrown', 'Flashes Thrown', 'Smokes Thrown', 'Molos Thrown']
+    
 
     const generateTradesOKData = (teamStats) => {
         return teamStats.map((user) => [
@@ -116,6 +132,8 @@ export const MatchDetails = () => {
             user.opening_traded,
         ]);
     };
+    const TradesColNames = ['Username', '', 'Trade Kills Attempts', 'Trade Kills Success', 'Traded Death Attempts', 'Traded Death Success',
+        'Opening attempts', 'Opening success', 'Openings traded'];
 
     const generateAimStats = (teamStats) => {
         return teamStats.map((user) => [
@@ -132,6 +150,8 @@ export const MatchDetails = () => {
             user.shots_fired,
         ]);
     };
+        const AimColNames = ['username', '','kills', 'total damage',
+        'hs kill percent', 'accuracy percent', 'head hit percent', 'shots fired']
 
     const generateWeaponStats = (userWeapons) => {
         return userWeapons.map((weapon) => [
@@ -143,19 +163,7 @@ export const MatchDetails = () => {
         ])
     }
 
-    const GenColNames = [ 'Username','Rating', 'Kills', 'Deaths', 'K/D Ratio', 'Total Damage', 'Hs kill %', 'Rounds Survived'];
     
-    const ClutchColNames = ['username', '','_2k', '_3k', '_4k', '_5k',
-    '_1v1', '_1v2', '_1v3', '_1v4', '_1v5', '_1v1_won', '_1v2_won', '_1v3_won', '_1v4_won', '_1v5_won']
-
-    const UtilityColNames = ['Username','', 'Enemies flashed', 'Flash assists', 'Friends flashed', 'Self-flashed', 'HE Damage', 'Molotov damage',
-        'AVG Blind Time', 'AVG unused Util Value', 'HE\'s thrown', 'Decoys thrown', 'Flashes Thrown', 'Smokes Thrown', 'Molos Thrown']
-    
-    const TradesColNames = ['Username', '', 'Trade Kills Attempts', 'Trade Kills Success', 'Traded Death Attempts', 'Traded Death Success',
-        'Opening attempts', 'Opening success', 'Openings traded'];
-
-    const AimColNames = ['username', '','kills', 'total damage',
-    'hs kill percent', 'accuracy percent', 'head hit percent', 'shots fired']
 
     const handleGeneralStats = async () => {
         try {
@@ -261,71 +269,86 @@ export const MatchDetails = () => {
                 const aim = data.match_details_aim_overall_stats || [];
                 const aim_ct = data.match_details_aim_ct_overall_stats || [];
                 const aim_tt = data.match_details_aim_tt_overall_stats || [];
-                const weapon_details = data.match_details_aim_weapon_details || [];
-                const hit_group = data.match_details_aim_weapon_hit_groups || [];
+                // const hit_group = data.match_details_aim_weapon_hit_groups || [];
                 setAim(aim);
                 setCtAim(aim_ct);
                 setTtAim(aim_tt);
-                setWeapons(weapon_details);
-                setHitGroup(hit_group);
+                // setHitGroup(hit_group);
             }
         } catch(error) {
             console.error(error);
         }
     }
     
+    const handleWeapons = async (selectedSteamId) => {
+        try {
+            const response = await fetch(`/xd/matches/${matchId}/details/aim?steam_id=${selectedSteamId}`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },   
+            }) 
+            if (response.ok) {
+                const data = await response.json();
+                const weapon_details = data.match_details_aim_weapon_details || [];
+                setWeapons(weapon_details);
+                return [...weapon_details]
+            }
+        } catch(error)
+        {
+            console.error(error)
+        }
+    }
+
     useEffect(() => {
         handleClutchesStats(); 
         handleGeneralStats();
         handleUtilityStats();
         handleTradesOKStats();
         handleAimStats();
-    }, [matchId]);
+        const weapon = generateWeaponStats(Weapons.filter(weapon => weapon.steam_id === selectedSteamId)) || [];
+        console.log(weapon)
+        setChosenWeapons(weapon)
+    }, [matchId, Weapons, selectedSteamId]);
     
-    console.log(hitGroup)
+    const t0General = generateGeneralData(General.filter(user => user.team === 0)) || [];
+    const t1General = generateGeneralData(General.filter(user => user.team === 1)) || [];
+    const t0CtGeneral = generateGeneralData(ctGeneral.filter(user => user.team === 0)) || [];
+    const t1CtGeneral = generateGeneralData(ctGeneral.filter(user => user.team === 1)) || [];
+    const t0TtGeneral = generateGeneralData(ttGeneral.filter(user => user.team === 0)) || [];
+    const t1TtGeneral = generateGeneralData(ttGeneral.filter(user => user.team === 1)) || [];
+    
+    const t0Clutches = generateClutchesData(Clutches.filter(user => user.team === 0)) || [];
+    const t1Clutches = generateClutchesData(Clutches.filter(user => user.team === 1)) || [];
+    const t0CtClutches = generateClutchesData(ctClutches.filter(user => user.team === 0));
+    const t1CtClutches = generateClutchesData(ctClutches.filter(user => user.team === 1));
+    const t0TtClutches = generateClutchesData(ttClutches.filter(user => user.team === 0));
+    const t1TtClutches = generateClutchesData(ttClutches.filter(user => user.team === 1));
+    
+    const t0Utility = generateUtilityData(Utility.filter(user => user.team === 0)) || [];
+    const t1Utility = generateUtilityData(Utility.filter(user => user.team === 1)) || [];
+    const t0CtUtility = generateUtilityData(ctUtility.filter(user => user.team === 0)) || [];
+    const t1CtUtility = generateUtilityData(ctUtility.filter(user => user.team === 1)) || [];
+    const t0TtUtility = generateUtilityData(ttUtility.filter(user => user.team === 0)) || [];
+    const t1TtUtility = generateUtilityData(ttUtility.filter(user => user.team === 1)) || [];
+    
+    const t0Trades = generateTradesOKData(TradesOK.filter(user => user.team === 0)) || [];
+    const t1Trades = generateTradesOKData(TradesOK.filter(user => user.team === 1)) || [];
+    const t0CtTrades = generateTradesOKData(ctTradesOK.filter(user => user.team === 0)) || [];
+    const t1CtTrades = generateTradesOKData(ctTradesOK.filter(user => user.team === 1)) || [];
+    const t0TtTrades = generateTradesOKData(ttTradesOK.filter(user => user.team === 0)) || [];
+    const t1TtTrades = generateTradesOKData(ttTradesOK.filter(user => user.team === 1)) || [];
+    
+    const t0Aim = generateAimStats(Aim.filter(user => user.team === 0)) || [];
+    const t1Aim = generateAimStats(Aim.filter(user => user.team === 1)) || [];
+    const t0CtAim = generateAimStats(ctAim.filter(user => user.team === 0)) || [];
+    const t1CtAim = generateAimStats(ctAim.filter(user => user.team === 1)) || [];
+    const t0TtAim = generateAimStats(ttAim.filter(user => user.team === 0)) || [];
+    const t1TtAim = generateAimStats(ttAim.filter(user => user.team === 1)) || [];
 if (isLoading) {
     return <p>Loading...</p>
 }
-const t0General = generateGeneralData(General.filter(user => user.team === 0)) || [];
-const t1General = generateGeneralData(General.filter(user => user.team === 1)) || [];
-const t0CtGeneral = generateGeneralData(ctGeneral.filter(user => user.team === 0)) || [];
-const t1CtGeneral = generateGeneralData(ctGeneral.filter(user => user.team === 1)) || [];
-const t0TtGeneral = generateGeneralData(ttGeneral.filter(user => user.team === 0)) || [];
-const t1TtGeneral = generateGeneralData(ttGeneral.filter(user => user.team === 1)) || [];
 
-const t0Clutches = generateClutchesData(Clutches.filter(user => user.team === 0)) || [];
-const t1Clutches = generateClutchesData(Clutches.filter(user => user.team === 1)) || [];
-const t0CtClutches = generateClutchesData(ctClutches.filter(user => user.team === 0));
-const t1CtClutches = generateClutchesData(ctClutches.filter(user => user.team === 1));
-const t0TtClutches = generateClutchesData(ttClutches.filter(user => user.team === 0));
-const t1TtClutches = generateClutchesData(ttClutches.filter(user => user.team === 1));
+const selectedPlayer = generateSelectedPlayer(General); 
 
-const t0Utility = generateUtilityData(Utility.filter(user => user.team === 0)) || [];
-const t1Utility = generateUtilityData(Utility.filter(user => user.team === 1)) || [];
-const t0CtUtility = generateUtilityData(ctUtility.filter(user => user.team === 0)) || [];
-const t1CtUtility = generateUtilityData(ctUtility.filter(user => user.team === 1)) || [];
-const t0TtUtility = generateUtilityData(ttUtility.filter(user => user.team === 0)) || [];
-const t1TtUtility = generateUtilityData(ttUtility.filter(user => user.team === 1)) || [];
-
-const t0Trades = generateTradesOKData(TradesOK.filter(user => user.team === 0)) || [];
-const t1Trades = generateTradesOKData(TradesOK.filter(user => user.team === 1)) || [];
-const t0CtTrades = generateTradesOKData(ctTradesOK.filter(user => user.team === 0)) || [];
-const t1CtTrades = generateTradesOKData(ctTradesOK.filter(user => user.team === 1)) || [];
-const t0TtTrades = generateTradesOKData(ttTradesOK.filter(user => user.team === 0)) || [];
-const t1TtTrades = generateTradesOKData(ttTradesOK.filter(user => user.team === 1)) || [];
-
-const t0Aim = generateAimStats(Aim.filter(user => user.team === 0)) || [];
-const t1Aim = generateAimStats(Aim.filter(user => user.team === 1)) || [];
-const t0CtAim = generateAimStats(ctAim.filter(user => user.team === 0)) || [];
-const t1CtAim = generateAimStats(ctAim.filter(user => user.team === 1)) || [];
-const t0TtAim = generateAimStats(ttAim.filter(user => user.team === 0)) || [];
-const t1TtAim = generateAimStats(ttAim.filter(user => user.team === 1)) || [];
-
-const weapon = generateWeaponStats(Weapons.filter(weapon => weapon.team ===0)) || [];
-
-
-
-    
     return (<>
     <div className='match-buttons-container'>
         <button className={`side-buttons ${isGeneral ? 'ct-selected': ''}`} onClick={() => {setIsGeneral(true); setIsClutches(false); setIsUtility(false); setIsTradesOK(false); setIsAim(false)}} type='button'>General</button>
@@ -333,11 +356,6 @@ const weapon = generateWeaponStats(Weapons.filter(weapon => weapon.team ===0)) |
         <button className={`side-buttons ${isUtility ? 'ct-selected': ''}`} onClick={() => {setIsGeneral(false); setIsClutches(false); setIsUtility(true); setIsTradesOK(false); setIsAim(false)}} type='button'>Utility</button>
         <button className={`side-buttons ${isTradesOK ? 'ct-selected': ''}`} onClick={() => {setIsGeneral(false); setIsClutches(false); setIsUtility(false); setIsTradesOK(true); setIsAim(false)}} type='button'>Trades & ok</button>
         <button className={`side-buttons ${isAim ? 'ct-selected': ''}`} onClick={() => {setIsGeneral(false); setIsClutches(false); setIsUtility(false); setIsTradesOK(false); setIsAim(true)}} type='button'>Aim</button>
-        
-        {/* <button className={`side-buttons ${isClutches ? 'ct-selected': ''}`} onClick={() => {isGeneral(false); isClutches(true); isUtility(false)}} type='button'>Trades and Opening Kills TODO</button>
-        <button className={`side-buttons ${isClutches ? 'ct-selected': ''}`} onClick={() => {isGeneral(false); isClutches(true); isUtility(false)}} type='button'>Aim TODO</button>
-    <button className={`side-buttons ${isClutches ? 'ct-selected': ''}`} onClick={() => {isGeneral(false); isClutches(true); isUtility(false)}} type='button'>Other TODO</button> */}
-
     </div>
     <div className='side-buttons-container'>
             <button className={`side-buttons ${CTsided ? 'ct-selected': ''}`} onClick={() => {setCTsided(true); setOverall(false); setTTsided(false); setIsWeapons(false)}} type='button'>Counter-terrorists Side</button>
@@ -475,11 +493,25 @@ const weapon = generateWeaponStats(Weapons.filter(weapon => weapon.team ===0)) |
                 <TableTemplate tableData={t1TtAim} colNames={AimColNames}/>
             </div></>
         ) : null}
-                {isAim & isWeapons ? (<>
-            <div className='terro-container'>
-                <TableTemplate tableData={weapon} colNames={AimColNames}/>
-            </div></>
-        ) : null}
+                {isAim && isWeapons ? (
+    <>
+        <select
+            id='selectPlayer'
+            value={selectedSteamId}
+            onChange={(e) => setSelectedSteamId(e.target.value)}
+        >
+            <option value=''>Choose a player</option>
+            {selectedPlayer.map((player) => (
+                <option key={player.steam_id} value={player[2]}>
+                    {player[0]}
+                </option>
+            ))}
+        </select>
+        <div className='terro-container'>
+            <TableTemplate tableData={selectedPlayerWeapons} colNames={AimColNames}/>
+        </div>
+    </>
+) : null}
     </>
     )
 }
