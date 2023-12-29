@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/login_form.css';
-import { useAuth } from './AuthContext';
+// import { useAuth } from './AuthContext';
 import LogoImage from '../assets/logov2.svg'
 import Arrow from '../assets/arrow.svg'
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, login } = useAuth();
+  // const { isAuthenticated, login } = useAuth();
   const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [password, setPassword] = useState('');
   const [progress, setProgress] = useState(false);
