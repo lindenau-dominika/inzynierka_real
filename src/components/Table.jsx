@@ -64,16 +64,16 @@ export const TableTemplate = (props) => {
                         <div style={{ alignItems: 'center' }}>
                           {cell > 0 && cell < 1 ? (
                             <div className='neutralrating-col'>
-                              {cell}
+                              {cell.toFixed(2)}
                             </div>
                           ) : (
                             cell >= 1 ? (
                               <div className='greatrating-col'>
-                                {cell}
+                                {cell.toFixed(2)}
                               </div>
                             ) : (
                               <div className='badrating-col'>
-                                {cell}
+                                {cell.toFixed(2)}
                               </div>
                             )
                           )}
