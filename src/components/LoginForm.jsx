@@ -37,7 +37,6 @@ const LoginForm = () => {
           setProgress(false);
           alert('Logged in successfully!');
           navigate(`/`);
-          // console.log(responseData)
         } else {
           alert('Error during logging in. Try again');
         }

@@ -6,6 +6,7 @@
 /* } */
 .logo {
   height: 3em;
+  min-width: 100px;
   left: 0;
   width: auto;
   padding: 1em;

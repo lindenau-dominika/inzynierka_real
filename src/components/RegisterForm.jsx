@@ -1,6 +1,7 @@
 import '../styles/login_form.css'
 import React, {useState} from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import LogoImage from '../assets/logov2.svg'
 
 export const RegisterForm = () => {
 
@@ -53,12 +54,13 @@ export const RegisterForm = () => {
 
 
     return (
-      <div>
-
+      <div class='dif2 col-24'>
+        <section>
         <div className="main_container">
+        <img src={LogoImage}/>
             <form onSubmit={handleSubmit} className={`login_container ${progress ? 'progress' : ''}`}>
             <h1>Register</h1>
-            <div>
+            <div className='extra'>
 
                 <input className='login-input' type="email" placeholder="E-mail" id="email" value={email} onChange={(e) =>setEmail(e.target.value)}/>
                 <input className='login-input' type="text" placeholder="Username" id="usrname" value={username} onChange={(e) => setUsername(e.target.value)}/>
@@ -73,6 +75,11 @@ export const RegisterForm = () => {
             </div>
             </form>
         </div>
+        </section>
+        <section>
+            <h1>Why is it worth it?</h1>
+            <h3>lol its not</h3>
+        </section>
         </div>
     )
   }

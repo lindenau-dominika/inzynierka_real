@@ -74,7 +74,6 @@
 //   useEffect(() => {
 //     handleUsersMatches();
 //   }, []);
-//   console.log(team0)
 
 //   if (isLoading) {
 //     return (

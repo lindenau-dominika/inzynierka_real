@@ -51,7 +51,7 @@ export const MatchesHistory = () => {
     return <p>Loading...</p>;
   }
 
-  const MatchesHistoryList = matchesHistory.slice(0,50).map((match) => ({
+  const MatchesHistoryList = matchesHistory.slice(0,30).map((match) => ({
       createdAt: match.created_at,
       map: mapNames[match.map],
       score: `${match.score}-${match.score2}`,
@@ -59,7 +59,6 @@ export const MatchesHistory = () => {
       matchId: match.match_id,
   }));
 
-  console.log(MatchesHistoryList);
   return (
     <ListTemplate listData={MatchesHistoryList} colNames={historyColNames} />
   );

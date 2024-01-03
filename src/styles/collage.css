@@ -15,7 +15,7 @@ img {
 
 .single-map {
     z-index: 1;
-    width: 20%;
+    width: 18%;
 }
 
 .map-container:hover img {
@@ -29,7 +29,7 @@ h4 {
     display: flex;
     top: 40px;
     margin-left: 20px;
-    font-size: 2vw;
+    font-size: 1.8vw;
     font-weight: 800;
     transition: 0.5s;
     font-family: 'Courier New', Courier, monospace;

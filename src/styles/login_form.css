@@ -42,7 +42,7 @@
     backdrop-filter: blur(7px);
     -webkit-backdrop-filter: blur(8px);
     border-radius: 0.5vw;
-    justify-content: space-between;
+    justify-content: center;
     word-wrap: break-word;
     padding-bottom: 20px;
     width: 100%;

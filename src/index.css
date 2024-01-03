@@ -65,12 +65,12 @@
   /* border: solid 1px red; */
 }
 
-/* h1 {
-  color: rgb(233, 233, 233);
+h1 {
+  color: #7272b0;
   font-size: 2.5vw;
   line-height: 1.1;
   opacity: 1;
-} */
+}
 
 button {
   box-shadow: 2px 6px 5px rgba(0, 0, 0, 0.25);
