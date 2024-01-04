@@ -12,10 +12,11 @@ body {
     
 }
 h2 {
-    text-align: left;
-    font-size: 1.2vw;
-    /* color: #878da4; */
     padding: 8px;
+}
+
+h3 {
+    color: white;
 }
 
 .side-buttons {
@@ -23,15 +24,15 @@ h2 {
     justify-content: center;
     width: 100%;
     font-size: 0.9vw;
-    border-radius: 0;
-    margin: 0;
+    border-radius: 5px;
+    margin: 2px;
 }
 .terro-selected {
     color: rgb(214, 138, 138);
     justify-content: center;
     background-color: #161623dc;    
     width: 100%;
-    border-radius: 0;
+    border-radius: 5px;
     font-size: 0.9vw;
 
 }
@@ -39,7 +40,7 @@ h2 {
     color: #92aaff;
     background-color: #161623dc;    
     width: 100%;
-    border-radius: 0;
+    border-radius: 5px;
     font-size: 0.9vw;
 
 }
@@ -49,8 +50,8 @@ h2 {
     justify-content: center;
     background-color: #161623dc;    
     width: 100%;
-    border-radius: 0;
     font-size: 0.9vw;
+    border-radius: 5px;
 }
 
 
@@ -78,8 +79,8 @@ h2 {
     width: 100%;
     padding: 7px;
     font-size: 1vw;
-    border-radius: 0;
-    margin: 0;
+    border-radius: 5px;
+    margin: 2px;
     justify-content: center;
 }
 
@@ -88,6 +89,7 @@ h2 {
     justify-content: center;
     background-color: #161623dc;    
     box-shadow: none;
+    border-radius: 5px;
 }
 
 select {
@@ -95,6 +97,12 @@ select {
 }
 
 option {
-
     color: white;
+}
+
+.match-image {
+    position: fixed;
+    width: 83vw;
+    height: 21vh;
+    border-radius: 5px;
 }

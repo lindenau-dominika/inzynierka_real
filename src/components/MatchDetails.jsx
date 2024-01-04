@@ -16,7 +16,7 @@ export const MatchDetails = () => {
     const [Overall, setOverall] = useState(true);
     const [TTsided, setTTsided] = useState(false);
     const [CTsided, setCTsided] = useState(false);
-    const [General, setGeneral] = useState([]);
+    // const [General, setGeneral] = useState([]);
     
     const [isGeneral, setIsGeneral] = useState(true);
     const [isClutches, setIsClutches] = useState(false);

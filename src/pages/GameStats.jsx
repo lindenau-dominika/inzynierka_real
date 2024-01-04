@@ -4,13 +4,17 @@ import '../styles/gamestats.css'
 import OverviewStats from "../components/Overview";
 import { useParams } from 'react-router-dom';
 import { MatchDetails } from "../components/MatchDetails";
+import {mapImages, mapNames} from '../components/MapsOrganizer';
 
 export const MatchPreview = (props) => {
+    const { mapName, date, score, score2 } = props;
+    const mapImage = mapImages[mapName];
     return (
         <div>
-            <h3>{props.date}</h3>
-            <h3>{props.mapName}</h3>
-            <h2>{`${props.score}-${props.score2}`}</h2>
+            <img className='match-image' src={mapImage}></img>
+            <h3>{date}</h3>
+            <h3>{mapName}</h3>
+            <h2>{`${score}-${score2}`}</h2>
         </div>
     )
 }
