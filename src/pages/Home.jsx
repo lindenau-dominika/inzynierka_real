@@ -1,10 +1,9 @@
-import React from 'react';
 import { Sidenav } from '../components/Sidenav';
 import { Collage } from '../components/Collage';
-import { Navigate } from 'react-router-dom';
-import { useAuth } from '../components/AuthContext';
 import '../styles/home.css'
 import MatchesHistory from '../components/MatchHistory';
+import { useAuth } from '../components/AuthContext';
+
 
 const Home = () => {
   // const { isAuthenticated } = useAuth();
@@ -15,21 +14,11 @@ const Home = () => {
 
   return (
     <>
-        <div className='col-3'>
           <Sidenav />
-        </div>
-      <div className='main-container col-21'>
-        <div className='col-23'>
+        <div className='col-21 home-box'>
         <h1>Recently played</h1>
           <Collage/>
-          {/* <OverviewStats/> */}
-        </div>
-        <div>
-          {/* wykresy */}
-        </div>
-        <div className='col-23'>
           <MatchesHistory />
-        </div>
       </div>
     </>
   );

@@ -8,9 +8,9 @@ export const Sidenav = () =>
     return (
             <div className='sidenav col-3'>
                             <Link to="/">
-              <div className='logo'>
+              {/* <div className='logo'> */}
                 <img src={LogoImage} alt="Logo of omega" />
-              </div>
+              {/* </div> */}
             </Link>
                 <Link to="/demo"> 2D Replays </Link>
                 <Link to="/statistics"> Stats </Link>

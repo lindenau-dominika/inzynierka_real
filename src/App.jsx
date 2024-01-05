@@ -1,11 +1,13 @@
-import { useState } from 'react'
 import './App.css'
 import Home from './pages/Home'
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
 import { Gamestats } from './pages/GameStats'
 import { LoginPage } from './pages/LoginPage'
 import Demo2D from './pages/Demo'
 import Canvas from './components/Canvas'
+import React, { useState, useEffect } from 'react';
+
+
 
 
 function App() {

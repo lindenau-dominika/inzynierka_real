@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useParams, useLocation, Link } from 'react-router-dom';
 import ListTemplate from './List';
+import { mapNames } from './MapsOrganizer';
 
 export const MatchesHistory = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [matchesHistory, setMatchesHistory] = useState([]);
-  const mapNames = {
-    'de_ancient': 'Ancient',
-    'de_anubis': 'Anubis',
-    'de_mirage': 'Mirage',
-    'de_vertigo': 'Vertigo',
-    'de_nuke': 'Nuke',
-    'de_overpass': 'Overpass',
-    'de_dust2': 'Dust 2',
-    'de_inferno': 'Inferno',
-  };
+
+  const memoizedMapNames = useMemo(() => mapNames, []);
 
   const handleMatchHistory = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/xd/matches`, {
+      const response = await fetch(`/xd/matches?limit=30`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +23,6 @@ export const MatchesHistory = () => {
         const data = await response.json();
         const matchesArray = data.matches.reverse() || [];
         setMatchesHistory(matchesArray);
-        setIsLoading(false);
       } else {
         console.error('Error during fetching overall stats');
       }
@@ -48,20 +40,18 @@ export const MatchesHistory = () => {
   }, []);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <ListTemplate listData={['Loading']} colNames={['Loading']} />;
   }
 
-  const MatchesHistoryList = matchesHistory.slice(0,30).map((match) => ({
-      createdAt: match.created_at,
-      map: mapNames[match.map],
-      score: `${match.score}-${match.score2}`,
-      platform: match.platform,
-      matchId: match.match_id,
+  const MatchesHistoryList = matchesHistory.slice(0, 30).map((match) => ({
+    createdAt: match.created_at,
+    map: memoizedMapNames[match.map],
+    score: `${match.score}-${match.score2}`,
+    platform: match.platform,
+    matchId: match.match_id,
   }));
 
-  return (
-    <ListTemplate listData={MatchesHistoryList} colNames={historyColNames} />
-  );
+  return <ListTemplate listData={MatchesHistoryList} colNames={historyColNames} />;
 };
 
 export default MatchesHistory;
