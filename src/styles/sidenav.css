@@ -9,10 +9,10 @@
     border-radius: 10px
 }
 
-.sidenav:hover {
+/* .sidenav:hover {
     background-color: #443e5d39;
     box-shadow: 0px 10px 14px rgba(0, 0, 0, 0.16); 
-}
+} */
 
 .sidenav a {
     padding: 8px 20px 8px 20px;

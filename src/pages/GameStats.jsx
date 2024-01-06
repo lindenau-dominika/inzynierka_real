@@ -10,11 +10,12 @@ export const MatchPreview = (props) => {
     const { mapName, date, score, score2 } = props;
     const mapImage = mapImages[mapName];
     return (
-        <div>
-            <img className='match-image' src={mapImage}></img>
-            <h3>{date}</h3>
-            <h3>{mapName}</h3>
-            <h2>{`${score}-${score2}`}</h2>
+        <div style={{ backgroundImage: `url(${mapImage})` }} className='match-card'>
+            <div className="image-cover">
+        <h3 className="extra">{date}</h3>
+        <h3 className="extra">{mapName}</h3>
+        <h2 className="extra">{`${score}-${score2}`}</h2>
+            </div>
         </div>
     )
 }
@@ -66,7 +67,7 @@ export const Gamestats = () => {
         <div className="col-3">
         <Sidenav />
         </div>
-        <div className="col-21">
+        <div className="col-21 home-box">
         <MatchPreview date={match.created_at} mapName={match.map} score={match.score} score2={match.score2}/>
         <div className="match-buttons-container">
         <button className={`match-buttons ${isOverview ? 'overview-selected': ''}`} onClick={() => {setIsOverview(true); setIsMatchDetails(false)}} type='button'>Overview</button>

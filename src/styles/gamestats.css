@@ -15,7 +15,12 @@ h2 {
     padding: 8px;
 }
 
-h3 {
+.image-cover {
+    background-color: rgba(0, 0, 0, 0.331);
+    padding: 10px;
+}
+
+.extra {
     color: white;
 }
 
@@ -93,16 +98,20 @@ h3 {
 }
 
 select {
-    background-color: black;
+    /* background-color: black; */
+    color: black;
 }
 
 option {
-    color: white;
+    color: black;
 }
 
-.match-image {
-    position: fixed;
-    width: 83vw;
-    height: 21vh;
+.match-card {
     border-radius: 5px;
-}
+    width: 100%;
+    opacity: 0.8;
+    background-size: cover;  /* dostosuj skalę obrazu */
+    background-position: center center;  /* dostosuj pozycję obrazu */
+    color: #fff;  /* kolor tekstu, aby był widoczny na tle obrazu */
+  }
+  

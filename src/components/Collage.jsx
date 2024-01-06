@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Carousel } from '@trendyol-js/react-carousel';
 import { Link } from 'react-router-dom';
 import '../styles/collage.css';
 import { useMediaQuery } from 'react-responsive';
-import {mapImages, mapNames} from './MapsOrganizer';
+import { mapImages, mapNames } from './MapsOrganizer';
 import SingleCard from './SingleCard';
 
 export const Collage = () => {
   const [recentMaps, setRecentMaps] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // const isSmallScreen = useMediaQuery({ maxWidth: 1200 });
-  // const isMediumScreen = useMediaQuery({ maxWidth: 1500 });
-
-  // const showItems = isSmallScreen ? 2 : isMediumScreen ? 3 : 4;
+  const memoizedMapImages = useMemo(() => mapImages, []);
+  const memoizedMapNames = useMemo(() => mapNames, []);
 
   const handleMaps = async () => {
     try {
@@ -40,12 +38,10 @@ export const Collage = () => {
 
   useEffect(() => {
     handleMaps();
-  });
+  }, []);
 
   if (isLoading) {
-    return (
-      <p >Loading...</p>
-      )
+    return <p>Loading...</p>;
   }
 
   return (
@@ -54,8 +50,8 @@ export const Collage = () => {
         <Link to={`/statistics/${maps.match_id}`} key={maps.match_id}>
           <SingleCard
             key={maps.match_id}
-            image={mapImages[maps.map]}
-            map_name={mapNames[maps.map]}
+            image={memoizedMapImages[maps.map]}
+            map_name={memoizedMapNames[maps.map]}
             score={`${maps.score}-${maps.score2}`}
             matchId={maps.match_id}
           />

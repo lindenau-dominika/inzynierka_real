@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import TableTemplate from '../components/Table';
 import '../styles/gamestats.css';
+import { handleWeapons } from './Weapons';
 
 export const Aim = (props) => {
     const { isOverall, isCTsided, isTTsided, isWeapons } = props;
@@ -13,6 +14,7 @@ export const Aim = (props) => {
     const [selectedPlayerSteamId, setSelectedPlayerSteamId] = useState(null);
     const [Weapons, setWeapons] = useState([]);
     const [selectedPlayerWeapons, setSelectedPlayerWeapons] = useState([]);
+    const [selected, setSelected] = useState('');
 
     const generateStats = (teamStats) => {
         return teamStats.map((user) => [
@@ -55,32 +57,22 @@ export const Aim = (props) => {
         }
     };
 
-    const handleWeapons = async (selectedSteamId) => {
-        try {
-            const response = await fetch(`/xd/matches/${matchId}/details/aim?steam_id=${selectedSteamId}`, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-            });
-            if (response.ok) {
-                const data = await response.json();
-                const weapon_details = data.match_details_aim_weapon_details || [];
-                setWeapons(weapon_details);
-                setSelectedPlayerWeapons([...weapon_details]);
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
+    const handleChange = (e) => {
+        const selectedSteamId = e.target.value;
+        console.log(selectedSteamId);
+        setSelected(selectedSteamId);
+        handleWeapons(selectedSteamId);
+    }
+    
     useEffect(() => {
         handleStats();
     }, [matchId]);
-
+    
     useEffect(() => {
         if (selectedPlayerSteamId) {
-            handleWeapons(selectedPlayerSteamId);
+            handleChange({ target: { value: selectedPlayerSteamId } }); // Wywołanie ręczne funkcji handleChange
         }
-    }, [selectedPlayerSteamId]);
+    }, [matchId, selectedPlayerSteamId]);
 
     const t0 = useMemo(() => generateStats(Aim.filter((user) => user.team === 0)) || []);
     const t1 = useMemo(() => generateStats(Aim.filter((user) => user.team === 1)) || []);
@@ -95,6 +87,23 @@ export const Aim = (props) => {
 
     return (
         <>
+            {isWeapons ? (
+                <>
+                    <select value={selected}
+                        onChange={(e) => handleChange(e)}>
+                        <option value=''>select Player</option>
+                        {Aim.map((player) => (
+                            <option key={player.steam_id} value={player.steam_id}>
+                                {player.username}
+                            </option>
+                        ))}
+                    </select>
+                    {selected == selectedPlayerSteamId?<TableTemplate tableData={t1Tt}/>:''}
+                    {/* {selectedPlayerWeapons.length > 0 && (
+                        <TableTemplate tableData={selectedPlayerWeapons} colNames={ColNames} />
+                    )} */}
+                </>
+            ) : null}
             {isOverall ? (
                 <div className='terro-container'>
                     <TableTemplate tableData={t0} colNames={ColNames} />
@@ -112,26 +121,6 @@ export const Aim = (props) => {
                     <TableTemplate tableData={t0Tt} colNames={ColNames} />
                     <TableTemplate tableData={t1Tt} colNames={ColNames} />
                 </div>
-            ) : null}
-            {isWeapons ? (
-                <>
-                    <select
-                        onChange={(e) => {
-                            const selectedSteamId = e.target.value;
-                            setSelectedPlayerSteamId(selectedSteamId);
-                        }}
-                    >
-                        <option value="">Select Player</option>
-                        {Aim.map((player) => (
-                            <option key={player.steam_id} value={player.steam_id}>
-                                {player.username}
-                            </option>
-                        ))}
-                    </select>
-                    {selectedPlayerWeapons.length > 0 && (
-                        <TableTemplate tableData={selectedPlayerWeapons} colNames={ColNames} />
-                    )}
-                </>
             ) : null}
         </>
     );

@@ -106,9 +106,9 @@ if (isLoading) {
         {isAim & TTsided ? (
             <Aim isTTsided={true}/>
         ) : null}
-        {/* {isAim && isWeapons ? (
+        {isAim && isWeapons ? (
             <Aim isWeapons={true}/>
-) : null} */}
+) : null}
     </>
     )
 }
