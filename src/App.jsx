@@ -1,6 +1,6 @@
 import './App.css'
 import Home from './pages/Home'
-import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route, Navigate, BrowserRouter} from 'react-router-dom'
 import { Gamestats } from './pages/GameStats'
 import { LoginPage } from './pages/LoginPage'
 import Demo2D from './pages/Demo'
@@ -10,10 +10,9 @@ import React, { useState, useEffect } from 'react';
 
 
 
-function App() {
-  
+const App = () => {
   return <>
-      <Router>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/demo" element={<Demo2D />} />
@@ -22,7 +21,7 @@ function App() {
           <Route path='*' element={<h1>PAGE NOT FOUND</h1>}/>
           <Route path='/statistics/:matchId' element={<Gamestats/>} />
         </Routes>
-      </Router>
+      </BrowserRouter>
     </>
 }
 

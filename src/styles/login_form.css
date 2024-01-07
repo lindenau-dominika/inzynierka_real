@@ -5,6 +5,12 @@
     align-items: center;
 }
 
+.errmsg {
+    background-color: #6c6cb8;
+    font-weight: 600;
+    border: solid 1px black;
+}
+
 .instr {
     display: flex;
     flex-direction: row;

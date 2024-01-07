@@ -2,7 +2,7 @@ import { Sidenav } from '../components/Sidenav';
 import { Collage } from '../components/Collage';
 import '../styles/home.css'
 import MatchesHistory from '../components/MatchHistory';
-import { useAuth } from '../components/AuthContext';
+// import { useAuth } from '../components/AuthContext';
 
 
 const Home = () => {

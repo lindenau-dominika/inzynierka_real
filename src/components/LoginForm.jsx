@@ -1,16 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
+import AuthContext from '../context/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/login_form.css';
-// import { useAuth } from './AuthContext';
 import LogoImage from '../assets/logov2.svg'
 import Arrow from '../assets/arrow.svg'
+import myAxios from '../api/axios';
+
+const LOGIN_URL = '/auth/signin';
 
 const LoginForm = () => {
+  const {setAuth} = useContext(AuthContext);
+  const userRef = useRef();
+  const errRef = useRef();
+
   const navigate = useNavigate();
-  // const { isAuthenticated, login } = useAuth();
+  const [username, setUsername] = useState('');
   const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [progress, setProgress] = useState(false);
+  const [errMsg, setErrMsg] = useState('');
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    userRef.current.focus();
+  }, [])
+
+  useEffect(() => {
+    setErrMsg('');
+  }, [usernameOrEmail, password]) 
 
   const userData = {
     usernameOrEmail,
@@ -20,6 +36,37 @@ const LoginForm = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    try {
+      const response = await myAxios.post(LOGIN_URL, 
+        JSON.stringify({username, password}),
+        {
+          headers: {'Content-Type': 'application/json'},
+            withCredentials: true
+        }
+      );
+      console.log(JSON.stringify(response?.data))
+      const accessToken = response?.data?.accessToken;
+      const roles = response?.data?.roles;
+      setAuth({ username, password, roles, accessToken});
+      setUsername('');
+      setPassword('');
+      setSuccess(true);
+
+    } catch(err) {
+      if (!err?.response) {
+        setErrMsg('No server Response');
+      } else if (err.response?.status === 400) {
+        setErrMsg('Missing Username or Password');
+      } else if (err.response?.status === 401) {
+        setErrMsg('Unauthorized');
+      } else {
+        setErrMsg('Login Failed');
+      }
+      errRef.current.focus();
+    }
+
+
     try {
       const response = await fetch('/api/auth/signin', {
         method: 'POST',
@@ -29,43 +76,47 @@ const LoginForm = () => {
         body: JSON.stringify(userData),
       });
 
-      if (response.ok) {
-        setProgress(true);
-        const responseData = await response.text();
-        if (responseData === 'Authentication successful') {
-          login();
-          setProgress(false);
-          alert('Logged in successfully!');
-          navigate(`/`);
-        } else {
-          alert('Error during logging in. Try again');
-        }
-      }
     } catch (error) {
-      setProgress(true);
       console.error('Error during logging proccess: ', error);
     }
   };
 
+
+
   return (<div className='dif2 col-24'>
-      <section className="main_container col-21" id='login'>
+      {success ? (
+        <section>
+          <h1>You are logged in!</h1>
+          <br/>
+          <p>
+          <Link to="/">asd</Link>
+          </p>
+        </section>
+      ) : (
+
+        <section className="main_container col-21" id='login'>
         <img src={LogoImage}  alt="Logo of omega" />
-        <form onSubmit={handleLogin} className={`login_container ${progress ? 'progress' : ''}`}>
+        <form onSubmit={handleLogin} className={`login_container`}>
           <h1>Garnuchy</h1>
+          <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
           <div className='extra'>
             <input className='login-input'
               type="text"
               placeholder="Username"
               id="usrname"
-              value={usernameOrEmail}
-              onChange={(e) => setUsernameOrEmail(e.target.value)}
+              ref={userRef}
+              autoComplete='off'
+              onChange={(e) => setUsername(e.target.value)}
+              value={username}
+              required
               />
             <input className='login-input' 
               type="password"
               placeholder="Password"
               id="pswrd"
-              value={password}
               onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              required
               />
             <input className="buttons" type="submit" id="loginButton" />
             <div>
@@ -74,6 +125,7 @@ const LoginForm = () => {
           </div>
         </form>
       </section>
+    )}
       <section className='extra col-21' id='instruction'>
         <div className='extra'>
           <h2>Check all the opportunities</h2>
