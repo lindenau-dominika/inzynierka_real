@@ -69,7 +69,7 @@ export const Collage = () => {
 
   return (
 <Carousel show={3} slide={3} swiping={false} transition={0.6} autoSwipe={0} leftArrow={<CustomButton dir={'l'}><img src={Arrow}/></CustomButton>} rightArrow={<CustomButton dir={'r'}><img src={Arrow}/></CustomButton>}>
-      {recentMaps.slice(0, 4).map((maps) => (
+      {recentMaps.slice(0, 50).map((maps) => (
         <Link to={`/statistics/${maps.match_id}`} key={maps.match_id}>
           <SingleCard
             key={maps.match_id}

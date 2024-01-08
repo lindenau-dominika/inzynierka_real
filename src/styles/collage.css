@@ -1,6 +1,6 @@
 .collage-img {
     max-width: 100%;
-    height: auto;
+    /* height: auto; */
     border-radius: 2%;
     opacity: 0.6;
     transition: 0.5s;
