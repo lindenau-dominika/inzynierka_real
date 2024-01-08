@@ -4,7 +4,7 @@ import '../styles/gamestats.css'
 import OverviewStats from "../components/Overview";
 import { useParams } from 'react-router-dom';
 import { MatchDetails } from "../components/MatchDetails";
-import {mapImages, mapNames} from '../components/MapsOrganizer';
+import {mapImages, mapNames} from '../templates/MapsOrganizer';
 
 export const MatchPreview = (props) => {
     const { mapName, date, score, score2 } = props;

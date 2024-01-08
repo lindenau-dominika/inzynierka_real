@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Canvas from "../components/Canvas";
+import Canvas from "../templates/Canvas";
 
 export const Demo2D = () => {
   

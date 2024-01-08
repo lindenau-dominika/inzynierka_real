@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useParams, useLocation, Link } from 'react-router-dom';
-import ListTemplate from './List';
-import { mapNames } from './MapsOrganizer';
+import ListTemplate from '../templates/List';
+import { mapNames } from '../templates/MapsOrganizer';
 
 export const MatchesHistory = () => {
   const [isLoading, setIsLoading] = useState(false);

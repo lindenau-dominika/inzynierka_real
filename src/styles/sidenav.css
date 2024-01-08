@@ -4,9 +4,13 @@
     height: 98%;
     left: 7px;
     position: fixed;
+    display: flex;
+    flex-direction: column;
     overflow-x: hidden;
     transition: 0.5s;
-    border-radius: 10px
+    align-items: center;
+    border-radius: 10px;
+    text-align: center;
 }
 
 /* .sidenav:hover {
@@ -23,13 +27,3 @@
     color: white;
 }
 
-.sidenav a:hover {
-    color: #8c95b8;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1px;
-}

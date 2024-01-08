@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Routes, Route, Navigate, BrowserRouter} from 'r
 import { Gamestats } from './pages/GameStats'
 import { LoginPage } from './pages/LoginPage'
 import Demo2D from './pages/Demo'
-import Canvas from './components/Canvas'
+// import Canvas from '../templates/Canvas'
 import React, { useState, useEffect } from 'react';
 
 

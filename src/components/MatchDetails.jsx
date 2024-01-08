@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import TableTemplate from './Table';
+import TableTemplate from '../templates/Table';
 import '../styles/gamestats.css';
 import Clutches from '../subpages/Clutches';
 import ElGeneral from '../subpages/General';

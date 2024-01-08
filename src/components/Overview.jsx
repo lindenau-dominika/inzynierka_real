@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TableTemplate } from '../components/Table';
+import { TableTemplate } from '../templates/Table';
 import '../styles/gamestats.css';
 import { useParams, useLocation, Link } from 'react-router-dom';
 

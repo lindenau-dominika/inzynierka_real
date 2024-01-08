@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import TableTemplate from '../components/Table';
+import TableTemplate from '../templates/Table';
 import '../styles/gamestats.css';
 
 

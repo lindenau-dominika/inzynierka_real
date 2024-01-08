@@ -3,9 +3,32 @@ import { Carousel } from '@trendyol-js/react-carousel';
 import { Link } from 'react-router-dom';
 import '../styles/collage.css';
 import { useMediaQuery } from 'react-responsive';
-import { mapImages, mapNames } from './MapsOrganizer';
-import SingleCard from './SingleCard';
+import { mapImages, mapNames } from '../templates/MapsOrganizer';
+import SingleCard from '../templates/SingleCard';
+import Arrow from '../assets/arrow.svg'
 
+const CustomButton = ({ children, onClick, disabled, dir }) => (
+  <button
+    onClick={onClick}
+    disabled={disabled}
+    style={{
+      background: 'none',
+      border: 'none',
+      padding: 0,
+      margin: 0,
+    }}
+  >
+    {dir === 'r' ? (
+      <span className={'custom-butt'} style={{ transform: 'rotate(-90deg)', display: 'inline-block', marginLeft: '-120px' }}>
+        {children}
+      </span>
+    ) : (
+      <span className={'custom-butt'} style={{ transform: 'rotate(90deg)', display: 'inline-block', marginRight: '-100px' }}>
+        {children}
+      </span>
+    )}
+  </button>
+);
 export const Collage = () => {
   const [recentMaps, setRecentMaps] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -45,8 +68,8 @@ export const Collage = () => {
   }
 
   return (
-    <Carousel show={3} slide={3} swiping={false} transition={1} autoSwipe={0}>
-      {recentMaps.map((maps) => (
+<Carousel show={3} slide={3} swiping={false} transition={0.6} autoSwipe={0} leftArrow={<CustomButton dir={'l'}><img src={Arrow}/></CustomButton>} rightArrow={<CustomButton dir={'r'}><img src={Arrow}/></CustomButton>}>
+      {recentMaps.slice(0, 4).map((maps) => (
         <Link to={`/statistics/${maps.match_id}`} key={maps.match_id}>
           <SingleCard
             key={maps.match_id}
