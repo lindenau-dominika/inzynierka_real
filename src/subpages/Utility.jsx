@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import TableTemplate from '../templates/Table';
 import '../styles/gamestats.css';
-import { PlayerUtUseChart, PlayerUtDmgChart} from '../templates/BarChart';
+import { PlayerUtUseChart, PlayerUtDmgChart, PlayerUtThrownChart} from '../templates/BarChart';
 
 export const Utility = (props) => {
     const { isOverall, isCTsided, isTTsided } = props;
@@ -16,20 +16,20 @@ export const Utility = (props) => {
 
     const generateData = (teamStats) => {
         return teamStats.map((user) => ({
-          nickname: user.username,
+          nickname: user.username,//
           enemies_flashed: user.enemies_flashed, //
           flash_assists: user.flash_assists, //
           friends_flashed: user.friends_flashed, //
           self_flashed: user.self_flashed, //
-          HE_damage: user.HE_damage,
-          molotov_damage: user.molotov_damage,
+          HE_damage: user.HE_damage, //
+          molotov_damage: user.molotov_damage, //
           avg_blind_time: user.avg_blind_time.toFixed(2), //
           avg_unused_util_value: user.avg_unused_util_value,
-          HEs_thrown: user.HEs_thrown,
-          decoys_thrown: user.decoys_thrown,
-          flashes_thrown: user.flashes_thrown,
-          smokes_thrown: user.smokes_thrown,
-          molos_thrown: user.molos_thrown,
+          HEs_thrown: user.HEs_thrown, //
+          decoys_thrown: user.decoys_thrown, //
+          flashes_thrown: user.flashes_thrown, // 
+          smokes_thrown: user.smokes_thrown, //
+          molos_thrown: user.molos_thrown, //
         }));
       };
 
@@ -77,10 +77,17 @@ export const Utility = (props) => {
     return (
         <>
             {isOverall ? (<>
+            <h2>Flash stats</h2>
                     <div className='maps'>
                         <PlayerUtUseChart data={t0}/>
                         <PlayerUtUseChart data={t1}/>
                     </div>
+                    <h2>Utility Thrown</h2>
+                    <div className='maps'>
+                        <PlayerUtThrownChart data={t0}/>
+                        <PlayerUtThrownChart data={t1}/>
+                    </div>
+                    <h2>Utility Damage and usage</h2>
                     <div className='maps'>
                         <PlayerUtDmgChart data={t0}/>
                         <PlayerUtDmgChart data={t1}/>
@@ -88,21 +95,40 @@ export const Utility = (props) => {
                     </>
             ) : null}
             {isCTsided ? (<>
+                <h2>Flash stats</h2>
                     <div className='maps'>
                         <PlayerUtUseChart data={t0Ct}/>
                         <PlayerUtUseChart data={t1Ct}/>
                     </div>
+                    <h2>Utility Thrown</h2>
                     <div className='maps'>
-                    <PlayerUtDmgChart data={t0Ct}/>
-                    <PlayerUtDmgChart data={t1Ct}/>
+                        <PlayerUtThrownChart data={t0Ct}/>
+                        <PlayerUtThrownChart data={t1Ct}/>
+                    </div>
+                    <h2>Utility Damage and usage</h2>
+                    <div className='maps'>
+                        <PlayerUtDmgChart data={t0Ct}/>
+                        <PlayerUtDmgChart data={t1Ct}/>
                     </div>
                     </>
             ) : null}
-            {isTTsided ? (
-                    <div className='terro-container'>
-                        <TableTemplate tableData={t0Tt} colNames={ColNames} />
-                        <TableTemplate tableData={t1Tt} colNames={ColNames} />
+            {isTTsided ? (<>
+                <h2>Flash stats</h2>
+                    <div className='maps'>
+                        <PlayerUtUseChart data={t0Tt}/>
+                        <PlayerUtUseChart data={t1Tt}/>
                     </div>
+                    <h2>Utility Thrown</h2>
+                    <div className='maps'>
+                        <PlayerUtThrownChart data={t0Tt}/>
+                        <PlayerUtThrownChart data={t1Tt}/>
+                    </div>
+                    <h2>Utility Damage and usage</h2>
+                    <div className='maps'>
+                        <PlayerUtDmgChart data={t0Tt}/>
+                        <PlayerUtDmgChart data={t1Tt}/>
+                    </div>
+                    </>
             ) : null}
         </>
     );

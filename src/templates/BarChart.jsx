@@ -31,11 +31,13 @@ export const PlayerUtUseChart = ({ data }) => {
   return (
     <BarChart 
     className='winrate-chart'
+    width={800}
+    height={450}
     data={data}
     >
       <CartesianGrid strokeDasharray="0" />
       <XAxis dataKey="nickname" />
-      <YAxis label={{angle: -90, position: 'insideLeft' }} tick={{ fontSize: 12 }}/>
+      <YAxis label={{angle: -90, position: 'insideLeft' }} tick={{ fontSize: 20 }}/>
       <Tooltip
       cursor={{ fill: 'rgba(1,0,0,0.5)' }} // Dostosowanie kursora Tooltip
       offset={20} // Ustawienie odstępu od punktu docelowego
@@ -51,23 +53,21 @@ export const PlayerUtUseChart = ({ data }) => {
       <Bar dataKey="friends_flashed" fill="#c54ccc" />
       <Bar dataKey="self_flashed" fill="#cc9ccc" />
       <Bar dataKey="avg_blind_time" fill="#ddd6dd" />
-      <Bar dataKey="HE_damage" fill="#aaaadb" />
     </BarChart>
   );
 };
 
-export const PlayerUtDmgChart = ({ data }) => {
+export const PlayerUtThrownChart = ({ data }) => {
   return (
     <BarChart
-    width={600}
-    height={400}
+    width={800}
+    height={450}
     data={data}
     margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
     >
-      {/* <CartesianGrid strokeDasharray="3 3" /> */}
       <XAxis dataKey="nickname" />
-      <YAxis />
-      <ReferenceLine x={50} stroke="#ffffff" dot={false} />
+      <YAxis label={{angle: -90, position: 'insideLeft' }} tick={{ fontSize: 20 }}/>
+      <CartesianGrid strokeDasharray="0" />
       <Tooltip
       cursor={{ fill: 'rgba(1,0,0,0.5)' }} // Dostosowanie kursora Tooltip
       offset={20} // Ustawienie odstępu od punktu docelowego
@@ -76,14 +76,43 @@ export const PlayerUtDmgChart = ({ data }) => {
       contentStyle={{ backgroundColor: '#0C0c10', border: '1px solid #222222' }}
       />
       {/* <Legend /> */}
-      <Bar dataKey="decoys_thrown" fill="#aaaadb" />
-      <Bar dataKey="HEs_thrown" fill="#c54ccc" />
-      {/* <Bar dataKey="avg_unused_util_value" fill="#c54ccc" /> */}
       <Bar dataKey="flashes_thrown" fill="#ddd6dd" />
+      <Bar dataKey="HEs_thrown" fill="#c54ccc" />
+      <Bar dataKey="smokes_thrown" fill="#cc9ccc" />
       <Bar dataKey="molos_thrown" fill="#cc9ccc" />
+      <Bar dataKey="decoys_thrown" fill="#aaaadb" />
       
     </BarChart>
   );
 };
 
-export default {SimpleBarChart, PlayerUtUseChart, PlayerUtDmgChart};
+
+export const PlayerUtDmgChart = ({ data }) => {
+  return (
+    <BarChart 
+    width={800}
+    height={450}
+    data={data}
+    margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+    >
+      {/* <CartesianGrid strokeDasharray="3 3" /> */}
+      <XAxis dataKey="nickname" />
+      <CartesianGrid strokeDasharray="0" />
+      <YAxis label={{angle: -90, position: 'insideLeft' }} tick={{ fontSize: 20 }}/>
+      <Tooltip
+      cursor={{ fill: 'rgba(1,0,0,0.5)' }} // Dostosowanie kursora Tooltip
+      offset={20} // Ustawienie odstępu od punktu docelowego
+      formatter={(value, name) => [value, name]} // Dostosowanie formatu treści Tooltip
+      labelStyle={{color: '#dddddd', fontWeight: 'bold'}}
+      contentStyle={{ backgroundColor: '#0C0c10', border: '1px solid #222222' }}
+      />
+      {/* <Legend /> */}
+      <Bar dataKey="HE_damage" fill="#ddd6dd" />
+      <Bar dataKey="molotov_damage" fill="#cc9ccc" />
+      <Bar dataKey="avg_unused_util_value" fill="#aaaadb" />
+      
+    </BarChart>
+  );
+};
+
+export default {SimpleBarChart, PlayerUtUseChart, PlayerUtDmgChart, PlayerUtThrownChart};

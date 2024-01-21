@@ -3,6 +3,9 @@
     width: 40%;
     margin: 20px 30px 20px 5px;
 }
+.stat-charts {
+    width: 100%;
+}
 
 @media only screen and (max-width: 768px) {
     .winrate-chart {
