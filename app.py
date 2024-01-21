@@ -10,7 +10,7 @@ database_password = os.environ.get('ANALYSER_DATABASE_PASSWORD')
 database_port = os.environ.get('ANALYSER_DATABASE_PORT')
 database_schema = os.environ.get('ANALYSER_DATABASE_SCHEMA')
 if database_server is None:
-    database_server = 'garnuchy.pl'  # "localhost"  #
+    database_server = 'garnuchy.pl'  #"localhost"  #
 if database_name is None:
     database_name = 'xcs'  #"postgres"  #
 if database_user is None:
@@ -451,6 +451,44 @@ def get_match_details_aim_weapon_hit_groups(cur, match_id):
     return match_details_aim_weapon_hit_groups
 
 
+def get_player_rating_and_winrate(cur, player_id, days):
+    cur.execute(f'''
+                SELECT COUNT(*) AS total_games,
+                COUNT(CASE WHEN ((score > score2 AND team = 0) OR (score2 > score AND team = 1)) THEN 1 END) / NULLIF(COUNT(*), 0) * 100 AS win_rate,
+                (
+                    SUM(CASE WHEN ms.side = 2 THEN ms.rating * (ms.deaths + ms.rounds_survived) ELSE 0 END) +
+                    SUM(CASE WHEN ms.side = 3 THEN ms.rating * (ms.deaths + ms.rounds_survived) ELSE 0 END)
+                ) / (CASE WHEN (SUM(ms.deaths) + SUM(ms.rounds_survived)) > 0 THEN (SUM(ms.deaths) + SUM(ms.rounds_survived)) ELSE 1 END) AS rating_overall
+                FROM matches_stats ms
+                JOIN matches mm ON ms.match_ID = mm.match_ID
+                WHERE player_ID = {player_id} AND mm.created_at >= CURRENT_DATE - INTERVAL '{days} days';
+                ''')
+    rows = cur.fetchall()
+    headers = ['total_games', 'win_rate', 'rating_overall']
+    player_rating_and_winrate = []
+    for row in rows:
+        player_rating_and_winrate.append(dict(zip(headers, row)))
+    return player_rating_and_winrate
+
+
+def get_player_maps_winrate(cur, player_id, days):
+    cur.execute(f'''
+                SELECT map, 
+                COUNT(*) AS total_games,
+                COUNT(CASE WHEN ((score > score2 AND team = 0) OR (score2 > score AND team = 1)) THEN 1 END) / NULLIF(COUNT(*), 0) * 100 AS win_rate
+                FROM matches_stats ms
+                JOIN matches mm ON ms.match_id = mm.match_id
+                WHERE player_id = {player_id} AND mm.created_at >= CURRENT_DATE - INTERVAL '{days} days'
+                GROUP BY map;
+                ''')
+    rows = cur.fetchall()
+    headers = ['map', 'total_games', 'win_rate']
+    player_maps_winrate = []
+    for row in rows:
+        player_maps_winrate.append(dict(zip(headers, row)))
+    return player_maps_winrate
+
+
 def get_db_connection():
     connection_string = f"dbname='{database_name}' user='{database_user}' password='{database_password}' host='{database_server}' port='{database_port}'"
     connection = psycopg2.connect(connection_string)
@@ -595,3 +633,11 @@ def match_details_aim(match_id):
                    match_details_aim_weapon_hit_groups_stats=match_details_aim_weapon_hit_groups_stats,
                    match_info=match_info)
 
+
+@app.route('/profile/<int:player_id>/<int:days>')
+def player_profile(player_id, days):
+    cur = conn.cursor()
+    player_rating_and_winrate = get_player_rating_and_winrate(cur, player_id, days)
+    player_maps_win_rate = get_player_maps_winrate(cur, player_id, days)
+    cur.close()
+    return jsonify(player_rating_and_winrate=player_rating_and_winrate, player_maps_win_rate=player_maps_win_rate)

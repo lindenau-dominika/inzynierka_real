@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import TableTemplate from '../templates/Table';
 import '../styles/gamestats.css';
+import { PlayerUtUseChart, PlayerUtDmgChart} from '../templates/BarChart';
 
 export const Utility = (props) => {
     const { isOverall, isCTsided, isTTsided } = props;
@@ -10,29 +11,28 @@ export const Utility = (props) => {
     const [Utility, setUtility] = useState([]);
     const [ctUtility, setCtUtility] = useState([]);
     const [ttUtility, setTtUtility] = useState([]);
-    
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+
     const generateData = (teamStats) => {
-        return teamStats.map((user) => [
-            {
-                image: user.avatar,
-                nickname: user.username,
-            },
-            user.null,
-            user.enemies_flashed,
-            user.flash_assists,
-            user.friends_flashed,
-            user.self_flashed,
-            user.HE_damage,
-            user.molotov_damage,
-            user.avg_blind_time.toFixed(2),
-            user.avg_unused_util_value,
-            user.HEs_thrown,
-            user.decoys_thrown,
-            user.flashes_thrown,
-            user.smokes_thrown,
-            user.molos_thrown
-        ]);
-    };
+        return teamStats.map((user) => ({
+          nickname: user.username,
+          enemies_flashed: user.enemies_flashed, //
+          flash_assists: user.flash_assists, //
+          friends_flashed: user.friends_flashed, //
+          self_flashed: user.self_flashed, //
+          HE_damage: user.HE_damage,
+          molotov_damage: user.molotov_damage,
+          avg_blind_time: user.avg_blind_time.toFixed(2), //
+          avg_unused_util_value: user.avg_unused_util_value,
+          HEs_thrown: user.HEs_thrown,
+          decoys_thrown: user.decoys_thrown,
+          flashes_thrown: user.flashes_thrown,
+          smokes_thrown: user.smokes_thrown,
+          molos_thrown: user.molos_thrown,
+        }));
+      };
+
     const ColNames = ['Username','', 'Enemies flashed', 'Flash assists', 'Friends flashed', 'Self-flashed', 'HE Damage', 'Molotov damage',
     'AVG Blind Time', 'AVG unused Util Value', 'HE\'s thrown', 'Decoys thrown', 'Flashes Thrown', 'Smokes Thrown', 'Molos Thrown']
     
@@ -76,17 +76,27 @@ export const Utility = (props) => {
 
     return (
         <>
-            {isOverall ? (
-                    <div className='terro-container'>
-                        <TableTemplate tableData={t0} colNames={ColNames} />
-                        <TableTemplate tableData={t1} colNames={ColNames} />
+            {isOverall ? (<>
+                    <div className='maps'>
+                        <PlayerUtUseChart data={t0}/>
+                        <PlayerUtUseChart data={t1}/>
                     </div>
+                    <div className='maps'>
+                        <PlayerUtDmgChart data={t0}/>
+                        <PlayerUtDmgChart data={t1}/>
+                    </div>
+                    </>
             ) : null}
-            {isCTsided ? (
-                    <div className='terro-container'>
-                        <TableTemplate tableData={t0Ct} colNames={ColNames} />
-                        <TableTemplate tableData={t1Ct} colNames={ColNames} />
+            {isCTsided ? (<>
+                    <div className='maps'>
+                        <PlayerUtUseChart data={t0Ct}/>
+                        <PlayerUtUseChart data={t1Ct}/>
                     </div>
+                    <div className='maps'>
+                    <PlayerUtDmgChart data={t0Ct}/>
+                    <PlayerUtDmgChart data={t1Ct}/>
+                    </div>
+                    </>
             ) : null}
             {isTTsided ? (
                     <div className='terro-container'>

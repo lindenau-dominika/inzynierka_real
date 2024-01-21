@@ -6,6 +6,7 @@ import de_nuke from '../assets/de_nuke.png';
 import de_overpass from '../assets/de_overpass.png';
 import de_dust2 from '../assets/de_dust2.png' 
 import de_inferno from '../assets/de_inferno.png' 
+import kitty from '../assets/de_nuke.png'
 
 export const mapImages = {
     'de_ancient': de_ancient,

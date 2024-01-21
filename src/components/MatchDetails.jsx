@@ -7,6 +7,7 @@ import ElGeneral from '../subpages/General';
 import Utility from '../subpages/Utility';
 import Trades from '../subpages/Trades';
 import Aim from '../subpages/Aim';
+import OverviewStats from './Overview';
 
 
 export const MatchDetails = () => {

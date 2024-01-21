@@ -14,6 +14,7 @@ const CustomButton = ({ children, onClick, disabled, dir }) => (
     style={{
       background: 'none',
       border: 'none',
+      boxShadow: 'none',
       padding: 0,
       margin: 0,
     }}
@@ -23,7 +24,7 @@ const CustomButton = ({ children, onClick, disabled, dir }) => (
         {children}
       </span>
     ) : (
-      <span className={'custom-butt'} style={{ transform: 'rotate(90deg)', display: 'inline-block', marginRight: '-100px' }}>
+      <span className={'custom-butt'} style={{ transform: 'rotate(90deg)', display: 'inline-block', marginRight: '-130px' }}>
         {children}
       </span>
     )}
@@ -61,6 +62,13 @@ export const Collage = () => {
 
   useEffect(() => {
     handleMaps();
+    const handleResize = () => {
+      handleMaps();
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   if (isLoading) {

@@ -12,9 +12,9 @@ export const Sidenav = () =>
                 <img className={'logo'} src={LogoImage} alt="Logo of omega" />
               {/* </div> */}
             </Link>
+                <Link to="/statistics"> Profile </Link>
                 <Link to="/demo"> 2D Replays </Link>
-                <Link to="/statistics"> Stats </Link>
-                <Link to="/"> jeszcze </Link>
+                {/* <Link to="/"> jeszcze </Link> */}
             </div>
     )
 }

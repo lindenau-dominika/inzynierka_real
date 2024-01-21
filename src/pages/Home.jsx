@@ -2,7 +2,7 @@ import { Sidenav } from '../components/Sidenav';
 import { Collage } from '../components/Collage';
 import '../styles/home.css'
 import MatchesHistory from '../components/MatchHistory';
-import SimpleBarChart from '../templates/BarChart';
+import { SimpleBarChart} from '../templates/BarChart';
 import Speedometer from '../templates/PieChart';
 import React, { useState, useEffect } from 'react';
 // import { useAuth } from '../components/AuthContext';
@@ -41,13 +41,15 @@ const Home = () => {
           <Sidenav />
         <div className='col-21 home-box'>
         <h1>Recently played</h1>
-          <Collage/>
+          <div className='coll'>
+            <Collage className='coll'/> 
+            </div>
           <div className='maps'>
             <div className='sis'> 
-            <SimpleBarChart height={screenHeight*0.25}width={screenWidth*0.3} data={data}/>
+            <SimpleBarChart height={screenHeight*0.2}width={screenWidth*0.5} data={data}/>
               <div className='speed-container'> 
               <h2>Recent Month Stats</h2>
-                <div className='maps'>
+                <div className='smol'>
                 <Speedometer value={ -0.61} percent={false} title={'Rating'}/>
                 <Speedometer value={ 36.12} percent={true} title={'Winrate'}/>
                 </div>

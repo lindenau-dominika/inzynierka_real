@@ -22,8 +22,8 @@ export const MatchPreview = (props) => {
 
 export const Gamestats = () => {
     // const [ Overview, setOverview] = useState(true);
-    const [isOverview, setIsOverview] = useState(true);
-    const [isMatchDetails, setIsMatchDetails] = useState(false);
+    const [isOverview, setIsOverview] = useState(false);
+    const [isMatchDetails, setIsMatchDetails] = useState(true);
     // const [MatchDetails, setMatchDetails] = useState();
     const [ matchInfo, setmatchInfo] = useState();
     const {matchId} = useParams();
@@ -70,8 +70,8 @@ export const Gamestats = () => {
         <div className="col-21 home-box">
         <MatchPreview date={match.created_at} mapName={match.map} score={match.score} score2={match.score2}/>
         <div className="match-buttons-container">
-        <button className={`match-buttons ${isOverview ? 'overview-selected': ''}`} onClick={() => {setIsOverview(true); setIsMatchDetails(false)}} type='button'>Overview</button>
-        <button className={`match-buttons ${isMatchDetails ? 'overview-selected': ''}`} onClick={() => {setIsOverview(false); setIsMatchDetails(true)}} type='button'>Match Details</button>
+        {/* <button className={`match-buttons ${isOverview ? 'overview-selected': ''}`} onClick={() => {setIsOverview(true); setIsMatchDetails(false)}} type='button'>Overview</button> */}
+        {/* <button className={`match-buttons ${isMatchDetails ? 'overview-selected': ''}`} onClick={() => {setIsOverview(false); setIsMatchDetails(true)}} type='button'>Match Details</button> */}
         </div>
         {isOverview ? (
             <OverviewStats />

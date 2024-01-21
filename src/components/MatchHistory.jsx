@@ -44,8 +44,9 @@ export const MatchesHistory = () => {
   }
 
   const MatchesHistoryList = matchesHistory.slice(0, 30).map((match) => ({
+    
     createdAt: match.created_at,
-    map: memoizedMapNames[match.map],
+    map: memoizedMapNames[match.map] || match.map,
     score: `${match.score}-${match.score2}`,
     platform: match.platform,
     matchId: match.match_id,
