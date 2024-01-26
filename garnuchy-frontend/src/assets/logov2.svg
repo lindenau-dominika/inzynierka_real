@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="239mm"
+   height="194mm"
+   viewBox="0 0 239 194"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   sodipodi:docname="logov2.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.74029882"
+     inkscape:cx="460.6248"
+     inkscape:cy="319.46559"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="1912"
+     inkscape:window-y="-3"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient4"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#91919d;stop-opacity:1;"
+         offset="0.14448982"
+         id="stop8" />
+      <stop
+         style="stop-color:#646476;stop-opacity:1;"
+         offset="0.30795577"
+         id="stop5" />
+      <stop
+         style="stop-color:#373747;stop-opacity:1;"
+         offset="0.50949371"
+         id="stop7" />
+      <stop
+         style="stop-color:#1d1d2e;stop-opacity:1;"
+         offset="0.71794873"
+         id="stop6" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4"
+       id="radialGradient6"
+       cx="110.91722"
+       cy="63.277676"
+       fx="110.91722"
+       fy="63.277676"
+       r="118.65655"
+       gradientTransform="matrix(2.270514,1.5184126,-0.48461916,0.72466109,-98.16264,-151.3251)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:270.933px;font-family:Georgia;-inkscape-font-specification:'Georgia Bold';fill:url(#radialGradient6);fill-rule:evenodd;stroke:none;stroke-width:0.379;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.3;fill-opacity:1"
+       x="0.96985263"
+       y="193.34146"
+       id="text1"
+       inkscape:export-filename="text1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="font-size:270.933px;stroke-width:0.379;fill:url(#radialGradient6);fill-opacity:1;stroke:none"
+         x="0.96985263"
+         y="193.34146">Ω</tspan></text>
+  </g>
+</svg>
