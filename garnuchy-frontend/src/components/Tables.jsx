@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/tables.css'
 
 const MatchTable = ({matchesData, onSort, colNames }) => {
     const handleSort = (column) => {
@@ -19,7 +20,7 @@ const MatchTable = ({matchesData, onSort, colNames }) => {
     //     return new Intl.DateTimeFormat('en-US', options).format(date);
     // }
     const handleRowClick = (item) => {
-      navigate(`/statistics/${item.matchId}`);
+      navigate(`/matches/${item.matchId}`);
     };
 
     return (
