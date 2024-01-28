@@ -1,0 +1,58 @@
+.maps-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    justify-content: space-around;
+    gap: 20px;
+  }
+  
+.map-tile {
+width: calc((100% / 3) - 35px);
+background-color: #1a1a2e;
+color: white;
+border-radius: 10px;
+border: 1px solid rgba(255, 255, 255, 0.059);
+padding: 20px;
+padding-top: 10px;
+box-shadow: 0 4px 8px rgb(0, 0, 0);
+display: flex;
+flex-direction: column;
+}
+  
+  .map-tile h3 {
+    margin-bottom: 10px;
+  }
+  
+  .map-tile img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .stats {
+    
+    margin-top: 20px;
+  }
+  
+  .stats > div {
+    
+    margin-bottom: 10px;
+  }
+  
+  .stats span:first-child {
+    color: #888;
+    margin-right: 10px;
+  }
+  
+  .stats span:last-child {
+    font-weight: bold;
+  }
+
+  .smol-charts {
+    display: flex;
+    flex-direction: column;
+  }
+  
+
+  
