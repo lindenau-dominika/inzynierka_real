@@ -1,8 +1,7 @@
 import { React, useState, useEffect } from 'react';
-import MatchTable from './Tables'
-// import MapNames from './MapOrganizer'
 import ListTemplate from './List';
 import Navigation from './Navbar';
+import '../styles/matchDetails.css'
 
 
 
@@ -10,23 +9,6 @@ const MatchesPage = () => {
     const historyColNames = ['Map', 'Score', 'Platform', 'Date'];
     const [matchesHistory, setMatchesHistory] = useState([]);
     const [sortOrder, setSortOrder] = useState({ column: null, ascending: true });
-
-    // const mapNames = (originalMapName) => {
-    //   const mapNamesMap = {
-    //     'de_anubis': 'Anubis',
-    //     'de_inferno': 'Inferno',
-    //     'de_mirage': 'Mirage',
-    //     'de_nuke': 'Nuke',
-    //     'de_overpass': 'Overpass',
-    //     'de_ancient': 'Ancient',
-    //     'de_vertigo': 'Vertigo',
-    //     'de_dust2': 'Dust 2',
-    //     'cs_italy': 'Italy',
-    //     'cs_office': 'Office',
-    //   };
-    //   return mapNamesMap[originalMapName] || originalMapName;
-    // };
-
 
     useEffect(() => {
         const handleMatchData = async () => {
@@ -40,32 +22,31 @@ const MatchesPage = () => {
             } 
         handleMatchData();
     },[]);
+
     if (!matchesHistory){
         return <div>Loading...</div>;
       }
+      const handleSort = (column) => {
+        setSortOrder((prevSortOrder) => ({
+          column,
+          ascending: column === prevSortOrder.column ? !prevSortOrder.ascending : true,
+        }));
+      };
+      
+      const handleButtonClick = async () => {
+          try {
+            const matchMaxID = matchesHistory[matchesHistory.length-1].match_id;
+            const response = await fetch(`https://art.garnuchy.pl/matches?limit=20&after=${matchMaxID}`);
+            const data = await response.json();
+            setMatchesHistory([... matchesHistory, ... data]);
+          } catch (error) {
+            console.error('Error fetching match data:', error);
+          }
+        };
 
-    // const handleSort = (column) => {
-    //     setSortOrder((prevSortOrder) => ({
-    //       column,
-    //       ascending: column === prevSortOrder.column ? !prevSortOrder.ascending : true,
-    //     }));
-    //   };
 
-    if (!Array.isArray(matchesHistory)) {
-        console.error('matchesHistory nie jest tablicą', matchesHistory);
-        return null;
-    }
-
-    // const MatchesHistoryList = matchesHistory.slice(0,20).map((match) => ({
-    //     createdAt: formatDate(match.created_at),
-    //     map: mapNames(match.map) || match.map,
-    //     score: `${match.score}-${match.score}`,
-    //     platform: match.platform,
-    //     matchId: match.match_id,
-    // }));
-
-    const sortedMatches = matchesHistory.slice().sort((a, b) => {
-      const multiplier = sortOrder.ascending ? 1 : -1;
+        const sortedMatches = matchesHistory.slice().sort((a, b) => {
+          const multiplier = sortOrder.ascending ? 1 : -1;
   
       switch (sortOrder.column) {
         case 'map':
@@ -84,7 +65,16 @@ const MatchesPage = () => {
 
       return (<>
       <Navigation />
-      <ListTemplate listData={sortedMatches} colNames={historyColNames}/>
+      <div className='general col' style={{margin: '-40px'}}>
+        <h1>
+          Overall Match History
+        </h1>
+        <div style={{width: '50vw'}}>
+
+      <ListTemplate listData={sortedMatches} colNames={historyColNames} title={null} onSort={handleSort}/>
+      <button onClick={() => handleButtonClick()}>Next 20 matches</button>
+        </div>
+      </div>
       </>
       )
 }

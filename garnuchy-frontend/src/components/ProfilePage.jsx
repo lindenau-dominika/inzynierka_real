@@ -72,9 +72,9 @@ const ProfilePage = () => {
         
     });
     const ratingChart = [
-        { name: 'Rating', x: stats.rating.toFixed(2), fill: "#ddfdff" },
-        { name: 'CT Rating', x: -12.1, fill: "#8884d8" },
-        { name: 'TT Rating', x: 0.96, fill: "#82ca9d" },
+        { name: 'Rating', x: stats.rating.toFixed(2), fill: "#82ca9d" },
+        { name: 'CT Rating', x: -12.1, fill: "#5050a6" },
+        { name: 'TT Rating', x: 0.96, fill: "#9c486e" },
         ];
     const winrateChart = [
         { name: 'WinRate', x: (stats.win_rate*100).toFixed(2), fill: "#82ca9d" },
@@ -127,24 +127,35 @@ const ProfilePage = () => {
 
         return (<>
         <Navigation />
+        <h1 className='row' style={{fontSize: '40px', marginTop: '-40px', color: '#f1d1f1', justifyContent: 'center', alignItems: 'end'}}>
+            {user.username}
+            </h1>
+        <br>
+        </br>
         <div className='page-con'>
-
             <div className='player-container'>
+                    {/* <p style={{padding: '10px'}}>{user.username}</p> */}
                 <div className='profile'>
                     <img src={user.avatar} alt='avatar'/>
-                    <p>{user.username}</p>
                 </div>
                 <div className='charts'>
+                    <div className='col'>
+                    <h2>Rating stats</h2>
                     <RatingChart data={ratingChart}  inner='20%' outer='100%' myBarSize={35} myWidth={200} myHeight={200} myMax={20}/>
+                    </div>
+                    <div>
+                    <h2>Winrate</h2>
                     <RatingChart data={winrateChart}  inner='60%' outer='100%' myBarSize={35} myWidth={200} myHeight={200} myMax={20}/>
+                    </div>
                 </div>
             </div>
                 <div className="container"> 
-                <ListTemplate listData={sortedMatches} colNames={historyColNames} onSort={handleSort}/>
+                <ListTemplate listData={sortedMatches} colNames={historyColNames} onSort={handleSort} title={'Recently Played'}/>
                 </div>
             </div>
+            <br></br>
+            <h1 style={{fontSize: '40px'}}>Maps Winrate</h1>
             <div className='maps-container'>
-
             {mapsWinrateChart.map(mapData => (
                 <MapTile key={mapData.label} data={mapData} />
                 ))}

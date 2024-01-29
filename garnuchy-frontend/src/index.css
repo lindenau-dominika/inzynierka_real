@@ -2,20 +2,54 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #07070c;
-
+  color: #ffffffde;
+  background-color: #040408;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+ /* scroll */
+ ::-webkit-scrollbar {
+  background: #0C0C13;
+  width: 10px;
+}
+
+.ratingm {
+  color: #9c486e;
+}
+.ratingp {
+  color: #5050a6;
+}
+
+::-webkit-scrollbar-track {
+  background:#080810;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0a0a14;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2f2f4a;
+}
+.row {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.col {
+  display: flex;
+  flex-direction: column;
 }
 
 a {
   font-weight: 500;
-  color: #9493bf;
+  color: #cccbfc;
   text-decoration: inherit;
 }
 a:hover {
@@ -27,7 +61,7 @@ body {
   display: flex;
   /* place-items: center; */
   justify-content: center;
-  margin-top:8vh;
+  margin-top: 6vw;
   min-width: 320px;
   min-height: 92vh;
 }
@@ -42,20 +76,22 @@ button {
   /* border-radius: 8px; */
   border: 1px solid transparent;
   /* margin: 10px; */
-  padding: 0.6em 1.2em;
+  padding: 0.4em 1em;
   font-size: 1em;
   font-weight: 500;
-  background-color: #07070c00;
+  background-color: #10101b00;
   font-family: inherit;
   cursor: pointer;
+  margin: 10px;
 }
 button:hover {
-  background-color: #1d1d2e00;
+  background-color: #c8c8ff1b;
+  border-radius: 5px;
 }
-button:focus,
+/* button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
+} */
 
 .twitch-container {
     display: flex;
@@ -168,4 +204,13 @@ input:checked + .slider:before {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.details-selected {
+  background-color: #313165;
+  border-radius: 5px;
+}
+.not-selected:hover {
+  background-color: #ebedff2e;
+  border-radius: 5px;
 }

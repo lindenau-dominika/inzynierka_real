@@ -4,6 +4,7 @@ import ListTemplate from './List';
 import TableTemplate from './TableTemplate';
 import Navigation from './Navbar';
 import MatchHeader from './MatchHeader';
+import '../styles/matchDetails.css'
 
 export const MatchDetails = () => {
     const {matchId} = useParams();
@@ -96,25 +97,25 @@ export const MatchDetails = () => {
                     { label: "ADR", accessor: "adr" },
                   ];
                   return <div key={i}>
-                    <TableTemplate tableData={sortedTeamStats} colNames={columns} onSort={sortOrder}/>
+                    <TableTemplate tableData={sortedTeamStats} colNames={columns} onSort={handleSort}/>
                   </div>;
                 })}
               </div>
             );
           };
-      const handleButtonClick = (selected) => {
-        setSelectedStats(selected);
+      const handleButtonClick = (selectedButton) => {
+        setSelectedStats(selectedButton);
       };
     return (<>
-    <div>
+      <div className='general'>
+    <div className='details-container' >
         <Navigation />
-        <MatchHeader matchInfo={info} active={"General"}></MatchHeader>
-      <div>
-        <button onClick={() => handleButtonClick('ct')}>CT Side</button>
-        <button onClick={() => handleButtonClick('overall')}>Overall</button>
-        <button onClick={() => handleButtonClick('tt')}>TT Side</button>
+        <MatchHeader matchInfo={info} selectedButton={"General"}></MatchHeader>
+        <div>
+        <button className={selectedStats === 'ct' ? 'sel-but-ct' : ''} onClick={() => handleButtonClick('ct')}>CT Side</button>
+        <button className={selectedStats === 'overall' ? 'sel-but' : ''} onClick={() => handleButtonClick('overall')}>Overall</button>
+        <button className={selectedStats === 'tt' ? 'sel-but-tt' : ''} onClick={() => handleButtonClick('tt')}>TT Side</button>
       </div>
-      <div>
         <GeneralTable teamStats={teamStats}/>
       </div>
     </div>

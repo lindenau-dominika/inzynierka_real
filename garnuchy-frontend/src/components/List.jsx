@@ -2,7 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-const ListTemplate = ({ listData, colNames }) => {
+const ListTemplate = ({ listData, colNames, title, onSort}) => {
   const navigate = useNavigate();
 
   const mapNames = (originalMapName) => {
@@ -51,29 +51,34 @@ const handleRowClick = (matchId) => {
   navigate(`/matches/${matchId}/general`);
 };
 
-  return (
-    <div className='content'>
-      <table>
-        <thead>
-          <tr>
-            {colNames.map((colName, index) => (
-              <th key={index}>{colName}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {listData.map(item => (
+return (
+  <div className='content'>
+    {title !== null && (
+      <thead style={{ width: '100%', borderRadius: '5px' }}>
+        <h3 style={{ margin: '5px 0px 5px 0px' }}>{title}</h3>
+      </thead>
+    )}
+    <table>
+      <thead>
+        <tr>
+          {colNames.map((colName, index) => (
+            <th key={index}>{colName}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {listData.map((item) => (
           <tr key={item.match_id} onClick={() => handleRowClick(item.match_id)}>
             <td>{mapNames(item.map)}</td>
             <td>{item.score[0]}:{item.score[1]}</td>
             <td>{item.platform}</td>
             <td>{formatDate(item.created_at)}</td>
           </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
 };
 
 export default ListTemplate;

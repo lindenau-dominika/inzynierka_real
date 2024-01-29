@@ -1,0 +1,156 @@
+.general {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.details-container {
+    width: 70vw;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+.tooltip {
+    background-color: #000000e9;
+    padding: 10px;
+    border-radius: 9px;
+    font-weight: 700;
+}
+
+.rounded-left {
+    border-radius: 50px 0 0px 50px;
+}
+.rounded-right {
+    border-radius: 0 50px 50px 0;
+}
+
+.row {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.but-con {
+    display: flex;
+    flex-direction: row;
+    /* border: 1px solid white; */
+    justify-content: space-evenly;
+    /* gap: 10px; */
+    font-size: 18px;
+    color: white;
+}
+
+.clutches-container {
+    display: flex;
+    /* border: 1px solid white; */
+    width: 70vw;
+    justify-content: space-between;
+}
+
+.team-clutches {
+    background-color: #080810;
+    background: radial-gradient(#0b0a16, #080812, #07070c);
+    border-radius: 10px;
+    display: flex;
+    width: 49%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.nicknames {
+    font-size: 15px;
+    padding-bottom: 3px;
+}
+
+.team-clutches img {
+    height: auto;
+    width: 50%; 
+    padding: 10px;
+    border-radius: 100%;
+}
+
+.player-con {
+    flex: 1; 
+    background-color: #080810;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    align-items: center;
+    border-radius: 10px 10px 0 0;
+    border-bottom: 1px solid #79797988;
+    justify-content: center;
+}
+
+.clutch-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    background-color: #0b0a16;
+}
+
+.won {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    background-color: #0b0a16;
+    background: radial-gradient( #5050a6, #313165);
+
+}
+.lost {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: antiquewhite; */
+    width: 70px;
+    height: 70px;
+    /* border: 1px solid white; */
+    border-radius: 10px;
+    background-color: #0b0a16;
+        background: radial-gradient( #9c486e, #602c43);
+
+}
+
+.clutch-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 18px;
+
+}
+
+.det {
+    display: flex;
+    flex-direction: column;
+}
+
+.sel-but {
+    background-color: #ffffff26;
+    border-radius: 5px;
+}
+.sel-but-ct {
+    background-color: #313165;
+    border-radius: 5px;
+}
+.sel-but-tt {
+    
+    background-color: #602c43;
+    border-radius: 5px;
+}
+
+
+.sel-but:hover {
+    background-color: #ffffff51;
+    border-radius: 5px;
+}
+
+

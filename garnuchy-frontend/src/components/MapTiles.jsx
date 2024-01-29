@@ -1,31 +1,3 @@
-// import React from 'react';
-// import '../styles/mapTile.css'
-// import { Bar, Rectangle } from 'recharts'
-
-// const MapTile = ({ data }) => {
-
-
-  
-//   return (
-//     <div className='map-tile'>
-//       <h3>{data.label}</h3>
-//       <img src={data.image}></img>
-//       <div className='win-rate'>
-//         <div className='smol-charts'>
-//       <span>WinRate </span>
-//       <span> {data.value}% </span>
-//       <span>Rating </span>
-//       <span> {data.rating} </span>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-
-// export default MapTile;
-
-
 import React from 'react';
 import '../styles/mapTile.css';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';

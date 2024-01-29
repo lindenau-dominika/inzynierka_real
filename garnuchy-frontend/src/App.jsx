@@ -6,6 +6,10 @@ import MatchDetails from './components/MatchDetails'
 import {BrowserRouter as Router, Routes, Route, Navigate, BrowserRouter} from 'react-router-dom'
 import PlayersPage from './components/PlayersPage'
 import ProfilePage from './components/ProfilePage'
+import MatchUtility from './components/UtilitySubpage'
+import MatchClutches from './components/ClutchesSubpage'
+import MatchImpact from './components/ImpactSubpage'
+import AimSubpage from './components/AimSubpage'
 
 function App() {
   return <>
@@ -16,11 +20,11 @@ function App() {
           <Route path="/matches/:matchId/general" element={<MatchDetails />} />
           <Route path="/players" element={<PlayersPage />} />
           <Route path='/profiles/:steamId' element={<ProfilePage />} /> 
-          {/*
           <Route path="/matches/:matchId/utility" element={<MatchUtility />} />
-          <Route path="/matches/:matchId/impact" element={<MatchImpact />} />
           <Route path="/matches/:matchId/clutches" element={<MatchClutches />} />+
-          <Route path="/matches/:matchId/aim" element={<MatchAim />} />
+          <Route path="/matches/:matchId/impact" element={<MatchImpact />} />
+          <Route path="/matches/:matchId/aim" element={<AimSubpage />} />
+          {/*
           <Route path='*' element={<h1>PAGE NOT FOUND</h1>}/>
         */}
         </Routes>

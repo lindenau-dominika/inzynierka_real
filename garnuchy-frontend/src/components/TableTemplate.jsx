@@ -10,11 +10,11 @@ export const TableTemplate = (props) => {
   function getRatingClass(ratingValue) {
     if (typeof ratingValue === 'number') {
       if (ratingValue > 2) {
-        return 'text-green-400';
+        return 'ratingp';
       } else if (ratingValue >= 0 && ratingValue <= 2) {
         return '';
       } else if (ratingValue < 0) {
-        return 'text-red-400';
+        return 'ratingm';
       }
     }
     return '';
@@ -22,7 +22,7 @@ export const TableTemplate = (props) => {
 
   return (
             <div>
-                <table>
+                <table className='details-container'>
                     <thead>
                         <tr>
                             {colNames.map((column, index) => (

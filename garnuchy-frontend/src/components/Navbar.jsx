@@ -19,7 +19,7 @@ const Navigation = () => {
                         <Link to="/matches" onClick={() => handleLinkClick('Matches')}>Matches</Link>
                     </li>
                     <li>
-                    <Link to="/players" onClick={() => handleLinkClick('Players')}>Players</Link>
+                    <Link to="/players" onClick={() => handleLinkClick('Players')} style={{padding: '15px 10px'}}>Players</Link>
                     </li>
                 </ul>
             </nav>

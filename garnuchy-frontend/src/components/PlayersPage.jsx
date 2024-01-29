@@ -9,6 +9,7 @@ const PlayersPage = () => {
     const [users, setUsers] = useState([]);
     const [user, setUser] = useState([]);
     const [topUsers, setTopUsers] = useState([]);
+    const [active, setActive] = useState('Players')
 
     const handleInput = (event) => {
         setInputVal(event.target.value);
@@ -55,7 +56,7 @@ const PlayersPage = () => {
                       <Link key={index} to={`/profiles/${user.id}`}>
                         <img src={user.avatar} alt="Avatar" />
                         <p className={usernameClass}>{user.username}</p>
-                        <p>{3.6}</p>
+                        <p>{3.7}</p>
                       </Link>
                     );
                   })}

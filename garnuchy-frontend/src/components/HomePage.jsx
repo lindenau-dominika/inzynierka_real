@@ -11,7 +11,7 @@ const HomePage = () => {
 
 
     return (
-      <div className='lol'>
+      <div className='general'>
         <Navigation />
         <div className='twitch-container'>
         <div className='switch-holder'>
@@ -59,7 +59,6 @@ const HomePage = () => {
         <h1>HLTV Top 10 Teams</h1>
         </div>
         </div>
-        <MatchesPage />
       </div>
     );
   };

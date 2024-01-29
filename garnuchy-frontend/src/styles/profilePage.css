@@ -1,11 +1,8 @@
 .player-container {
     display: flex;
-    /* border: 1px solid rgb(255, 255, 255); */
     flex-direction: column;
     justify-content: center;
-    /* align-items: center; */
-    /* border: 3px solid rgba(116, 121, 140, 0.396); */
-    background-color: #181827;
+    background-color: #0c0c17;
     border-radius: 10px;
     align-items: center;
     margin-right: 15px;
@@ -31,11 +28,12 @@
     /* height: 55%; */
 }
 
+
 .profile img {
     height: 150px;
     border-radius: 50%;
     margin: 15px;
-    border: 3px solid rgb(40, 42, 48);
+    border: 3px solid #282a30;
 }
 
 p {

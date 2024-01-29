@@ -1,8 +1,9 @@
 import { mapImages, mapNames } from "./MapOrganizer";
 import React from 'react';
 import '../styles/matchHeader.css'
+import MatchButtons from './MatchButtons'
 
-const MatchHeader = ({ matchInfo, active }) => {
+const MatchHeader = ({ matchInfo, selectedButton }) => {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const options = {
@@ -28,6 +29,7 @@ const MatchHeader = ({ matchInfo, active }) => {
                 <p className="score">{formatDate(matchInfo.created_at)}</p>
         </div>
     </div>
+        <MatchButtons selectedDetailsButton={selectedButton} matchId={matchInfo.match_id}/>
     </header>
   )
 

@@ -15,18 +15,18 @@ const RatingChart = ({ data, inner, outer, myBarSize, myWidth, myHeight, myMax }
       width={myWidth}
       height={myHeight}
       data={data}
-      border={'1px solid white'}
+      // border={'1px solid white'}
     >
       <PolarAngleAxis
         type="number"
-        domain={[-myMax, myMax]} // Zmiana domeny na zakres od -myMax do myMax
+        domain={[-myMax, myMax]} 
         angleAxisId={0}
         tick={false}
       />
       <RadialBar
         minAngle={15}
         clockWise={true}
-        background={{ fill: '#102946' }}
+        background={{ fill: '#080810' }}
         dataKey="x"
         label={{ fill: '#fff', position: 'insideStart' }}
       />
