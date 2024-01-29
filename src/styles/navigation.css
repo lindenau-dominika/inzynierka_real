@@ -1,0 +1,32 @@
+ul {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    margin-top: 0px;
+    justify-content: center;
+}
+
+li {
+    list-style: none;
+    margin: 10px;
+    font-size: 24px;
+}
+
+.bar {
+    background-color: #080810;
+    width: 100%;
+}
+
+.selected-nav {
+    background-color: aliceblue;
+    border-radius: 5px;
+}
+
+.not-sel-nav:hover {
+    background-color: rgba(240, 248, 255, 0.129);
+
+}

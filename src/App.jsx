@@ -1,25 +1,32 @@
+import { useState } from 'react'
 import './App.css'
-import Home from './pages/Home'
+import Home from './components/HomePage'
+import Matches from './components/MatchesPage'
+import MatchDetails from './components/MatchDetails'
 import {BrowserRouter as Router, Routes, Route, Navigate, BrowserRouter} from 'react-router-dom'
-import { Gamestats } from './pages/GameStats'
-import { LoginPage } from './pages/LoginPage'
-import Demo2D from './pages/Demo'
-// import Canvas from '../templates/Canvas'
-import React, { useState, useEffect } from 'react';
+import PlayersPage from './components/PlayersPage'
+import ProfilePage from './components/ProfilePage'
+import MatchUtility from './components/UtilitySubpage'
+import MatchClutches from './components/ClutchesSubpage'
+import MatchImpact from './components/ImpactSubpage'
+import AimSubpage from './components/AimSubpage'
 
-
-
-
-const App = () => {
+function App() {
   return <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/demo" element={<Demo2D />} />
-          <Route path="/Login" element={<LoginPage form={'LoginForm'}/>} />
-          <Route path="/Register" element={<LoginPage form={'RegisterForm'}/>} />
+          <Route path="/matches" element={<Matches />} />
+          <Route path="/matches/:matchId/general" element={<MatchDetails />} />
+          <Route path="/players" element={<PlayersPage />} />
+          <Route path='/profiles/:steamId' element={<ProfilePage />} /> 
+          <Route path="/matches/:matchId/utility" element={<MatchUtility />} />
+          <Route path="/matches/:matchId/clutches" element={<MatchClutches />} />+
+          <Route path="/matches/:matchId/impact" element={<MatchImpact />} />
+          <Route path="/matches/:matchId/aim" element={<AimSubpage />} />
+          {/*
           <Route path='*' element={<h1>PAGE NOT FOUND</h1>}/>
-          <Route path='/statistics/:matchId' element={<Gamestats/>} />
+        */}
         </Routes>
       </BrowserRouter>
     </>
